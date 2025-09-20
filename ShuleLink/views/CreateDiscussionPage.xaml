@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShuleLink.Views.CreateDiscussionPage"
+             Title="New Discussion"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        
+        <!-- Header -->
+        <Frame Grid.Row="0" BackgroundColor="#4A90E2" HasShadow="False" CornerRadius="0" Padding="15">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Grid.Column="0" 
+                        Text="←" 
+                        FontSize="20" 
+                        BackgroundColor="Transparent" 
+                        TextColor="White" 
+                        Clicked="OnBackClicked"/>
+                
+                <Label Grid.Column="1" 
+                       Text="Create New Discussion" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       TextColor="White" 
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center"/>
+                
+                <Button Grid.Column="2" 
+                        x:Name="PostButton"
+                        Text="Post" 
+                        FontSize="16" 
+                        BackgroundColor="#27AE60" 
+                        TextColor="White" 
+                        CornerRadius="15"
+                        Padding="15,8"
+                        Clicked="OnPostClicked"/>
+            </Grid>
+        </Frame>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1" Padding="20">
+            <StackLayout Spacing="20">
+                
+                <!-- Title Input -->
+                <Frame BackgroundColor="White" CornerRadius="12" HasShadow="False" Padding="0">
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Discussion Title" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50"/>
+                        <Entry x:Name="TitleEntry" 
+                               Placeholder="What would you like to discuss?" 
+                               FontSize="16"
+                               TextColor="#2C3E50"
+                               BackgroundColor="Transparent"/>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Category Selection -->
+                <Frame BackgroundColor="White" CornerRadius="12" HasShadow="False" Padding="0">
+                    <StackLayout Spacing="15" Padding="20">
+                        <Label Text="Category" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50"/>
+                        
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                            <!-- Subject -->
+                            <StackLayout Grid.Column="0" Grid.Row="0">
+                                <Label Text="Subject" FontSize="14" TextColor="#7F8C8D"/>
+                                <Picker x:Name="SubjectPicker" FontSize="14">
+                                    <Picker.Items>
+                                        <x:String>Math</x:String>
+                                        <x:String>Science</x:String>
+                                        <x:String>English</x:String>
+                                        <x:String>Social Studies</x:String>
+                                        <x:String>Kiswahili</x:String>
+                                        <x:String>General</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </StackLayout>
+                            
+                            <!-- Grade -->
+                            <StackLayout Grid.Column="1" Grid.Row="0">
+                                <Label Text="Grade" FontSize="14" TextColor="#7F8C8D"/>
+                                <Picker x:Name="GradePicker" FontSize="14">
+                                    <Picker.Items>
+                                        <x:String>Grade 1</x:String>
+                                        <x:String>Grade 2</x:String>
+                                        <x:String>Grade 3</x:String>
+                                        <x:String>Grade 4</x:String>
+                                        <x:String>Grade 5</x:String>
+                                        <x:String>All Grades</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </StackLayout>
+                            
+                            <!-- Topic -->
+                            <StackLayout Grid.Column="2" Grid.Row="0">
+                                <Label Text="Topic" FontSize="14" TextColor="#7F8C8D"/>
+                                <Entry x:Name="TopicEntry" 
+                                       Placeholder="Optional topic" 
+                                       FontSize="14"
+                                       TextColor="#2C3E50"/>
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Content Input -->
+                <Frame BackgroundColor="White" CornerRadius="12" HasShadow="False" Padding="0">
+                    <StackLayout Spacing="10" Padding="20">
+                        <Label Text="Discussion Content" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50"/>
+                        <Editor x:Name="ContentEditor" 
+                                Placeholder="Share your thoughts, ask questions, or start a discussion..." 
+                                FontSize="15"
+                                HeightRequest="200"
+                                TextColor="#2C3E50"
+                                BackgroundColor="Transparent"/>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Attachment Options -->
+                <Frame BackgroundColor="White" CornerRadius="12" HasShadow="False" Padding="0">
+                    <StackLayout Spacing="15" Padding="20">
+                        <Label Text="Attachments" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50"/>
+                        
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                            <Button Grid.Column="0" 
+                                    Text="📷 Photo" 
+                                    FontSize="14" 
+                                    BackgroundColor="#E3F2FD" 
+                                    TextColor="#1976D2" 
+                                    CornerRadius="8"
+                                    Clicked="OnAttachPhotoClicked"/>
+                            
+                            <Button Grid.Column="1" 
+                                    Text="📄 Document" 
+                                    FontSize="14" 
+                                    BackgroundColor="#F3E5F5" 
+                                    TextColor="#7B1FA2" 
+                                    CornerRadius="8"
+                                    Clicked="OnAttachDocumentClicked"/>
+                            
+                            <Button Grid.Column="2" 
+                                    Text="🔗 Link" 
+                                    FontSize="14" 
+                                    BackgroundColor="#E8F5E8" 
+                                    TextColor="#388E3C" 
+                                    CornerRadius="8"
+                                    Clicked="OnAttachLinkClicked"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="1" 
+                           x:Name="LoadingIndicator" 
+                           IsVisible="False" 
+                           IsRunning="False" 
+                           Color="#4A90E2" 
+                           VerticalOptions="Center" 
+                           HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

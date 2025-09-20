@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShuleLink.Views.DiagramPage"
+             Title="Science Diagram"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,*">
+        
+        <!-- Header -->
+        <Frame Grid.Row="0" BackgroundColor="#E74C3C" HasShadow="True" CornerRadius="0" Padding="15">
+            <Grid ColumnDefinitions="Auto,*">
+                <Button Grid.Column="0" 
+                        Text="←" 
+                        FontSize="20" 
+                        BackgroundColor="Transparent" 
+                        TextColor="White" 
+                        Clicked="OnBackClicked"/>
+                
+                <StackLayout Grid.Column="1" Margin="10,0,0,0">
+                    <Label x:Name="DiagramTitleLabel" 
+                           Text="Science Diagram" 
+                           FontSize="18" 
+                           FontAttributes="Bold" 
+                           TextColor="White"/>
+                    <Label Text="Educational Diagram" 
+                           FontSize="14" 
+                           TextColor="White" 
+                           Opacity="0.9"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1" Padding="20">
+            <StackLayout Spacing="20">
+                
+                <!-- Diagram Display -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="20">
+                    <StackLayout Spacing="15">
+                        <Label Text="🔬 Interactive Diagram" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#2C3E50" 
+                               HorizontalOptions="Center"/>
+                        
+                        <!-- Placeholder for diagram -->
+                        <Frame BackgroundColor="#F8F9FA" 
+                               CornerRadius="10" 
+                               Padding="40" 
+                               HasShadow="False">
+                            <StackLayout Spacing="10">
+                                <Label x:Name="DiagramIconLabel" 
+                                       Text="🫁" 
+                                       FontSize="80" 
+                                       HorizontalOptions="Center"/>
+                                <Label x:Name="DiagramDescriptionLabel" 
+                                       Text="This is where an interactive diagram would be displayed. In a full implementation, this would show detailed anatomical or scientific diagrams with clickable parts and explanations." 
+                                       FontSize="14" 
+                                       TextColor="#7F8C8D" 
+                                       HorizontalTextAlignment="Center" 
+                                       LineBreakMode="WordWrap"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Key Points -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="20">
+                    <StackLayout Spacing="15">
+                        <Label Text="📝 Key Points" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#2C3E50"/>
+                        
+                        <StackLayout x:Name="KeyPointsContainer" Spacing="10">
+                            <!-- Key points will be added dynamically -->
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                
+                <Button Text="🧠 Take Quiz on This Topic" 
+                        BackgroundColor="#9B59B6" 
+                        TextColor="White" 
+                        CornerRadius="25" 
+                        FontSize="16"
+                        HeightRequest="50"
+                        Clicked="OnTakeQuizClicked"/>
+                
+            </StackLayout>
+        </ScrollView>
+        
+    </Grid>
+</ContentPage>

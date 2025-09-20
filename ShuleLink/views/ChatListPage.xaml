@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:ShuleLink.Converters"
+             x:Class="ShuleLink.Views.ChatListPage"
+             Title="Chat with Teachers"
+             BackgroundColor="{DynamicResource BackgroundLight}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converters:BoolToStatusColorConverter x:Key="BoolToStatusColorConverter"/>
+            <converters:BoolToStatusTextConverter x:Key="BoolToStatusTextConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+        
+        <!-- Header -->
+        <Frame Grid.Row="0" BackgroundColor="#4A90E2" HasShadow="False" CornerRadius="0" Padding="20,15">
+            <Grid ColumnDefinitions="*,Auto">
+                <StackLayout Grid.Column="0">
+                    <Label Text="💬 Chat with Teachers" 
+                           FontSize="24" 
+                           FontAttributes="Bold" 
+                           TextColor="White" 
+                           HorizontalOptions="Center"/>
+                    <Label Text="Connect with your class teacher and subject teachers" 
+                           FontSize="14" 
+                           TextColor="White" 
+                           Opacity="0.9" 
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+                
+                <!-- Discussion Spinner Button -->
+                <Frame Grid.Column="1"
+                       BackgroundColor="White"
+                       CornerRadius="20"
+                       WidthRequest="40"
+                       HeightRequest="40"
+                       HasShadow="False"
+                       Padding="0"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDiscussionsClicked"/>
+                    </Frame.GestureRecognizers>
+                    <Label Text="💭"
+                           FontSize="20"
+                           TextColor="#4A90E2"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Frame>
+            </Grid>
+        </Frame>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1" Padding="15">
+            <StackLayout Spacing="20">
+                
+                <!-- AI Assistant Section -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="False" 
+                       CornerRadius="15" 
+                       Padding="0">
+                    
+                    <StackLayout>
+                        <!-- AI Section Header -->
+                        <Frame BackgroundColor="#9B59B6" 
+                               CornerRadius="15,15,0,0" 
+                               Padding="15" 
+                               HasShadow="False">
+                            <Label Text="🤖 AI Learning Assistant" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold" 
+                                   TextColor="White" 
+                                   HorizontalOptions="Center"/>
+                        </Frame>
+                        
+                        <!-- AI Assistant Card -->
+                        <Frame BackgroundColor="Transparent" 
+                               HasShadow="False" 
+                               Padding="15">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAIAssistantTapped"/>
+                            </Frame.GestureRecognizers>
+                            
+                            <Grid ColumnDefinitions="60,*,Auto">
+                                <!-- AI Avatar -->
+                                <Frame Grid.Column="0" 
+                                       BackgroundColor="#9B59B6" 
+                                       WidthRequest="50" 
+                                       HeightRequest="50" 
+                                       CornerRadius="25" 
+                                       HasShadow="False" 
+                                       Padding="0">
+                                    <Label Text="🤖" 
+                                           FontSize="24" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center"/>
+                                </Frame>
+                                
+                                <!-- AI Info -->
+                                <StackLayout Grid.Column="1" 
+                                           Spacing="5" 
+                                           VerticalOptions="Center" 
+                                           Margin="15,0,0,0">
+                                    <Label Text="AI Learning Assistant" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#2C3E50"/>
+                                    <Label Text="Ask questions, get help with homework, and learn new topics" 
+                                           FontSize="12" 
+                                           TextColor="#7F8C8D"/>
+                                    <Label Text="🟢 Always Available" 
+                                           FontSize="11" 
+                                           TextColor="#27AE60"/>
+                                </StackLayout>
+                                
+                                <!-- Chat Icon -->
+                                <Label Grid.Column="2" 
+                                       Text="💬" 
+                                       FontSize="20" 
+                                       VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+                
+                <!-- Class Teacher Section -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="False" 
+                       CornerRadius="15" 
+                       Padding="0">
+                    
+                    <StackLayout>
+                        <!-- Section Header -->
+                        <Frame BackgroundColor="#27AE60" 
+                               CornerRadius="15,15,0,0" 
+                               Padding="15,10" 
+                               HasShadow="False">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="📌" FontSize="18"/>
+                                <Label Text="Your Class Teacher" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="White" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        
+                        <!-- Class Teacher Card -->
+                        <Frame x:Name="ClassTeacherFrame" 
+                               BackgroundColor="Transparent" 
+                               HasShadow="False" 
+                               Padding="15">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnClassTeacherTapped"/>
+                            </Frame.GestureRecognizers>
+                            
+                            <Grid ColumnDefinitions="60,*,Auto">
+                                <!-- Profile Image -->
+                                <Frame Grid.Column="0" 
+                                       BackgroundColor="#E3F2FD" 
+                                       CornerRadius="30" 
+                                       WidthRequest="60" 
+                                       HeightRequest="60" 
+                                       HasShadow="False" 
+                                       Padding="0">
+                                    <Label Text="👩‍🏫" 
+                                           FontSize="24" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center"/>
+                                </Frame>
+                                
+                                <!-- Teacher Info -->
+                                <StackLayout Grid.Column="1" 
+                                           Spacing="5" 
+                                           VerticalOptions="Center" 
+                                           Margin="15,0,0,0">
+                                    <Label x:Name="ClassTeacherName" 
+                                           Text="Loading..." 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#2C3E50"/>
+                                    <Label x:Name="ClassTeacherSubject" 
+                                           Text="Class Teacher" 
+                                           FontSize="14" 
+                                           TextColor="#7F8C8D"/>
+                                    <StackLayout Orientation="Horizontal" Spacing="5">
+                                        <Ellipse x:Name="ClassTeacherStatus" 
+                                                Fill="#27AE60" 
+                                                WidthRequest="8" 
+                                                HeightRequest="8"/>
+                                        <Label Text="Online" 
+                                               FontSize="12" 
+                                               TextColor="#27AE60"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                
+                                <!-- Unread Badge -->
+                                <Frame Grid.Column="2" 
+                                       x:Name="ClassTeacherBadge"
+                                       BackgroundColor="#E74C3C" 
+                                       CornerRadius="10" 
+                                       WidthRequest="20" 
+                                       HeightRequest="20" 
+                                       HasShadow="False" 
+                                       Padding="0"
+                                       IsVisible="False">
+                                    <Label x:Name="ClassTeacherUnreadCount" 
+                                           Text="2" 
+                                           FontSize="10" 
+                                           TextColor="White" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center"/>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Subject Teachers Section -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="False" 
+                       CornerRadius="15" 
+                       Padding="0">
+                    
+                    <StackLayout>
+                        <!-- Section Header -->
+                        <Frame BackgroundColor="#3498DB" 
+                               CornerRadius="15,15,0,0" 
+                               Padding="15,10" 
+                               HasShadow="False">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="👥" FontSize="18"/>
+                                <Label Text="Subject Teachers" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="White" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        
+                        <!-- Teachers List -->
+                        <CollectionView x:Name="TeachersCollectionView" 
+                                      BackgroundColor="Transparent"
+                                      SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame BackgroundColor="Transparent" 
+                                           HasShadow="False" 
+                                           Padding="15,10">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnTeacherTapped"/>
+                                        </Frame.GestureRecognizers>
+                                        
+                                        <Grid ColumnDefinitions="50,*,Auto">
+                                            <!-- Profile Image -->
+                                            <Frame Grid.Column="0" 
+                                                   BackgroundColor="#F0F8FF" 
+                                                   CornerRadius="25" 
+                                                   WidthRequest="50" 
+                                                   HeightRequest="50" 
+                                                   HasShadow="False" 
+                                                   Padding="0">
+                                                <Label Text="👨‍🏫" 
+                                                       FontSize="20" 
+                                                       HorizontalOptions="Center" 
+                                                       VerticalOptions="Center"/>
+                                            </Frame>
+                                            
+                                            <!-- Teacher Info -->
+                                            <StackLayout Grid.Column="1" 
+                                                       Spacing="3" 
+                                                       VerticalOptions="Center" 
+                                                       Margin="12,0,0,0">
+                                                <Label Text="{Binding Name}" 
+                                                       FontSize="15" 
+                                                       FontAttributes="Bold" 
+                                                       TextColor="#2C3E50"/>
+                                                <Label Text="{Binding Subject}" 
+                                                       FontSize="13" 
+                                                       TextColor="#7F8C8D"/>
+                                                <StackLayout Orientation="Horizontal" Spacing="5">
+                                                    <Ellipse Fill="{Binding IsOnline, Converter={StaticResource BoolToStatusColorConverter}}" 
+                                                            WidthRequest="6" 
+                                                            HeightRequest="6"/>
+                                                    <Label Text="{Binding IsOnline, Converter={StaticResource BoolToStatusTextConverter}}" 
+                                                           FontSize="11" 
+                                                           TextColor="{Binding IsOnline, Converter={StaticResource BoolToStatusColorConverter}}"/>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            
+                                            <!-- Action Button -->
+                                            <Button Grid.Column="2" 
+                                                    Text="💬" 
+                                                    FontSize="16" 
+                                                    BackgroundColor="#4A90E2" 
+                                                    TextColor="White" 
+                                                    CornerRadius="15" 
+                                                    WidthRequest="40" 
+                                                    HeightRequest="30" 
+                                                    Padding="0"
+                                                    Clicked="OnTeacherChatButtonClicked"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Quick Actions -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="False" 
+                       CornerRadius="15" 
+                       Padding="20">
+                    
+                    <StackLayout Spacing="15">
+                        <Label Text="💡 Quick Actions" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#2C3E50"/>
+                        
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                            
+                            <Button Grid.Row="0" Grid.Column="0"
+                                    Text="📞 Emergency Contact" 
+                                    BackgroundColor="#E74C3C" 
+                                    TextColor="White" 
+                                    CornerRadius="10" 
+                                    FontSize="12"
+                                    Clicked="OnEmergencyContactClicked"/>
+                            
+                            <Button Grid.Row="0" Grid.Column="1"
+                                    Text="📋 Report Issue" 
+                                    BackgroundColor="#F39C12" 
+                                    TextColor="White" 
+                                    CornerRadius="10" 
+                                    FontSize="12"
+                                    Clicked="OnReportIssueClicked"/>
+                            
+                            <Button Grid.Row="1" Grid.Column="0"
+                                    Text="📚 Ask for Help" 
+                                    BackgroundColor="#9B59B6" 
+                                    TextColor="White" 
+                                    CornerRadius="10" 
+                                    FontSize="12"
+                                    Clicked="OnAskForHelpClicked"/>
+                            
+                            <Button Grid.Row="1" Grid.Column="1"
+                                    Text="📝 Homework Help" 
+                                    BackgroundColor="#1ABC9C" 
+                                    TextColor="White" 
+                                    CornerRadius="10" 
+                                    FontSize="12"
+                                    Clicked="OnHomeworkHelpClicked"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+                
+            </StackLayout>
+        </ScrollView>
+        
+        <!-- Loading Indicator -->
+        <ActivityIndicator x:Name="LoadingIndicator" 
+                          Grid.Row="1"
+                          IsVisible="False" 
+                          IsRunning="False" 
+                          Color="#4A90E2" 
+                          VerticalOptions="Center" 
+                          HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

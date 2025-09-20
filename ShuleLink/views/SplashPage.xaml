@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShuleLink.Views.SplashPage"
+             NavigationPage.HasNavigationBar="False"
+             Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <!-- Background Gradient -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#4A90E2" Offset="0.0" />
+                <GradientStop Color="#5DADE2" Offset="0.5" />
+                <GradientStop Color="#85C1E9" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- Simplified decorative elements to reduce memory usage -->
+        <Grid Opacity="0.4">
+            <!-- Simple stars without complex frames -->
+            <Label Text="⭐" 
+                   FontSize="16" 
+                   TextColor="#F1C40F"
+                   HorizontalOptions="Start" 
+                   VerticalOptions="Start"
+                   Margin="80,120,0,0"/>
+            <Label Text="⭐" 
+                   FontSize="16" 
+                   TextColor="#F1C40F"
+                   HorizontalOptions="End" 
+                   VerticalOptions="Start"
+                   Margin="0,120,80,0"/>
+            <Label Text="⭐" 
+                   FontSize="16" 
+                   TextColor="#F1C40F"
+                   HorizontalOptions="Start" 
+                   VerticalOptions="End"
+                   Margin="80,0,0,120"/>
+            <Label Text="⭐" 
+                   FontSize="16" 
+                   TextColor="#F1C40F"
+                   HorizontalOptions="End" 
+                   VerticalOptions="End"
+                   Margin="0,0,80,120"/>
+        </Grid>
+
+        <!-- Main Content -->
+        <StackLayout VerticalOptions="Center" 
+                     HorizontalOptions="Center"
+                     Spacing="30">
+
+            <!-- Simplified Logo Area -->
+            <Frame BackgroundColor="White" 
+                   CornerRadius="60" 
+                   WidthRequest="120" 
+                   HeightRequest="120"
+                   Padding="20"
+                   HasShadow="False">
+
+                <!-- Simple Education Icons -->
+                <StackLayout VerticalOptions="Center" 
+                             HorizontalOptions="Center"
+                             Spacing="5">
+                    <!-- Graduation Cap -->
+                    <Label Text="🎓" 
+                           FontSize="24" 
+                           HorizontalOptions="Center"/>
+                    
+                    <!-- Open Book -->
+                    <Label Text="📖" 
+                           FontSize="28" 
+                           HorizontalOptions="Center"/>
+                    
+                    <!-- Simple A+ -->
+                    <Label Text="A+" 
+                           FontSize="12" 
+                           FontAttributes="Bold"
+                           TextColor="#27AE60"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Simplified App Title -->
+            <StackLayout Spacing="5">
+                <Label Text="ShuleLink" 
+                       FontSize="32" 
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+                
+                <Label Text="Educational Excellence" 
+                       FontSize="14" 
+                       TextColor="White"
+                       Opacity="0.9"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <!-- Simplified Loading Spinner -->
+            <StackLayout Spacing="10" 
+                         Margin="0,20,0,0">
+                
+                <!-- Simple Spinner -->
+                <ActivityIndicator x:Name="LoadingSpinner"
+                                   IsRunning="True"
+                                   Color="White"
+                                   WidthRequest="30"
+                                   HeightRequest="30"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+
+                <Label Text="Loading..." 
+                       FontSize="12" 
+                       TextColor="White"
+                       Opacity="0.8"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+
+        </StackLayout>
+
+        <!-- Simplified Progress Dots -->
+        <StackLayout Orientation="Horizontal" 
+                     HorizontalOptions="Center"
+                     VerticalOptions="End"
+                     Margin="0,0,0,40"
+                     Spacing="8">
+            <Label x:Name="Dot1" 
+                   Text="●" 
+                   TextColor="White"
+                   FontSize="12"
+                   Opacity="1"/>
+            <Label x:Name="Dot2" 
+                   Text="●" 
+                   TextColor="White"
+                   FontSize="12"
+                   Opacity="0.5"/>
+            <Label x:Name="Dot3" 
+                   Text="●" 
+                   TextColor="White"
+                   FontSize="12"
+                   Opacity="0.5"/>
+        </StackLayout>
+
+    </Grid>
+</ContentPage>

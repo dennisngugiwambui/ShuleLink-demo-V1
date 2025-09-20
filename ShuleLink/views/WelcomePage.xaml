@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShuleLink.Views.WelcomePage"
+             Title="Welcome"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <!-- Modern Gradient Background -->
+        <BoxView>
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#667eea" Offset="0.0" />
+                    <GradientStop Color="#764ba2" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+
+        <!-- Floating Elements Background -->
+        <Grid>
+            <Ellipse Fill="#FFFFFF" 
+                     Opacity="0.1" 
+                     WidthRequest="200" 
+                     HeightRequest="200" 
+                     HorizontalOptions="Start" 
+                     VerticalOptions="Start" 
+                     Margin="-100,-100,0,0"/>
+            <Ellipse Fill="#FFFFFF" 
+                     Opacity="0.05" 
+                     WidthRequest="300" 
+                     HeightRequest="300" 
+                     HorizontalOptions="End" 
+                     VerticalOptions="Center" 
+                     Margin="0,0,-150,0"/>
+            <Ellipse Fill="#FFFFFF" 
+                     Opacity="0.08" 
+                     WidthRequest="150" 
+                     HeightRequest="150" 
+                     HorizontalOptions="Center" 
+                     VerticalOptions="End" 
+                     Margin="0,0,0,-75"/>
+        </Grid>
+
+        <!-- Main Content -->
+        <ScrollView>
+            <Grid RowDefinitions="*,Auto,*" Padding="30,80,30,40" MinimumHeightRequest="800">
+                
+                <!-- Top Section -->
+                <StackLayout Grid.Row="0" VerticalOptions="Center" Spacing="40">
+                    
+                    <!-- Modern App Logo -->
+                    <Frame BackgroundColor="White" 
+                           CornerRadius="40" 
+                           WidthRequest="120" 
+                           HeightRequest="120" 
+                           HorizontalOptions="Center"
+                           HasShadow="True">
+                        <Frame.Shadow>
+                            <Shadow Brush="Black" Offset="0,10" Radius="30" Opacity="0.2"/>
+                        </Frame.Shadow>
+                        <Label Text="🎓" 
+                               FontSize="50" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center"/>
+                    </Frame>
+                    
+                    <!-- Welcome Text -->
+                    <StackLayout Spacing="15">
+                        <Label Text="Welcome to" 
+                               FontSize="24" 
+                               TextColor="White" 
+                               Opacity="0.9"
+                               HorizontalOptions="Center"/>
+                        <Label Text="ShuleLink" 
+                               FontSize="42" 
+                               FontAttributes="Bold" 
+                               TextColor="White"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Smart Learning Platform" 
+                               FontSize="18" 
+                               TextColor="White" 
+                               Opacity="0.8"
+                               HorizontalOptions="Center"/>
+                    </StackLayout>
+                    
+                    <!-- Feature Highlights -->
+                    <StackLayout Spacing="20" Margin="0,30,0,0">
+                        <Grid ColumnDefinitions="Auto,*" Margin="20,0">
+                            <Label Grid.Column="0" Text="🤖" FontSize="24" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="AI-Powered Learning Assistant" 
+                                   FontSize="16" TextColor="White" Opacity="0.9" 
+                                   VerticalOptions="Center" Margin="15,0,0,0"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*" Margin="20,0">
+                            <Label Grid.Column="0" Text="📊" FontSize="24" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="Interactive Quizzes &amp; Progress Tracking" 
+                                   FontSize="16" TextColor="White" Opacity="0.9" 
+                                   VerticalOptions="Center" Margin="15,0,0,0"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*" Margin="20,0">
+                            <Label Grid.Column="0" Text="💬" FontSize="24" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="Connect with Teachers &amp; Classmates" 
+                                   FontSize="16" TextColor="White" Opacity="0.9" 
+                                   VerticalOptions="Center" Margin="15,0,0,0"/>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <!-- Action Buttons -->
+                <StackLayout Grid.Row="1" Spacing="20" Margin="0,50,0,0">
+                    
+                    <!-- Modern Action Buttons -->
+                    <Button x:Name="LoginBtn"
+                            Text="🔐 Sign In to Your Account"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            BackgroundColor="White"
+                            TextColor="#667eea"
+                            CornerRadius="25"
+                            HeightRequest="60"
+                            Margin="20,0"
+                            Clicked="OnLoginClicked">
+                        <Button.Shadow>
+                            <Shadow Brush="Black" Offset="0,8" Radius="20" Opacity="0.2"/>
+                        </Button.Shadow>
+                    </Button>
+                    
+                    <Button x:Name="RegisterBtn"
+                            Text="✨ Create New Account"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            BackgroundColor="Transparent"
+                            TextColor="White"
+                            BorderColor="White"
+                            BorderWidth="2"
+                            CornerRadius="25"
+                            HeightRequest="60"
+                            Margin="20,0"
+                            Clicked="OnRegisterClicked"/>
+                    
+                    <!-- Quick Demo Button -->
+                    <Button x:Name="DemoBtn"
+                            Text="👀 Quick Demo"
+                            FontSize="16"
+                            BackgroundColor="Transparent"
+                            TextColor="White"
+                            Opacity="0.8"
+                            CornerRadius="20"
+                            HeightRequest="50"
+                            Margin="40,10"
+                            Clicked="OnDemoClicked"/>
+
+                </StackLayout>
+
+                <!-- Bottom Section -->
+                <StackLayout Grid.Row="2" VerticalOptions="End" Spacing="15">
+                    <!-- App Version -->
+                    <Label Text="ShuleLink v1.0 - Empowering Education" 
+                           FontSize="12" 
+                           TextColor="White" 
+                           Opacity="0.7"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

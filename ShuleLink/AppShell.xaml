@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ShuleLink.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ShuleLink"
+    xmlns:views="clr-namespace:ShuleLink.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="ShuleLink">
+
+    <!-- Authentication Pages (No Tab Bar) -->
+    <ShellContent
+        Title="Welcome"
+        Route="WelcomePage">
+        <ShellContent.ContentTemplate>
+            <DataTemplate>
+                <views:WelcomePage />
+            </DataTemplate>
+        </ShellContent.ContentTemplate>
+    </ShellContent>
+
+    <ShellContent
+        Title="Login"
+        Route="LoginPage">
+        <ShellContent.ContentTemplate>
+            <DataTemplate>
+                <views:LoginPage />
+            </DataTemplate>
+        </ShellContent.ContentTemplate>
+    </ShellContent>
+
+    <ShellContent
+        Title="Register"
+        Route="RegisterPage">
+        <ShellContent.ContentTemplate>
+            <DataTemplate>
+                <views:RegisterPage />
+            </DataTemplate>
+        </ShellContent.ContentTemplate>
+    </ShellContent>
+
+    <!-- Main App with Bottom Tab Bar - Enhanced Icons -->
+    <TabBar x:Name="MainTabBar" 
+            Route="MainTabs">
+        
+        <!-- Dashboard Tab -->
+        <Tab Title="Dashboard">
+            <Tab.Icon>
+                <FontImageSource FontFamily="Segoe UI Emoji" 
+                               Glyph="🏠" 
+                               Size="24" 
+                               Color="{DynamicResource TabBarSelected}"/>
+            </Tab.Icon>
+            <ShellContent
+                Route="MainPage">
+                <ShellContent.ContentTemplate>
+                    <DataTemplate>
+                        <local:MainPage />
+                    </DataTemplate>
+                </ShellContent.ContentTemplate>
+            </ShellContent>
+        </Tab>
+        
+        <!-- Chat Tab -->
+        <Tab Title="Chat">
+            <Tab.Icon>
+                <FontImageSource FontFamily="Segoe UI Emoji" 
+                               Glyph="💬" 
+                               Size="24" 
+                               Color="{DynamicResource TabBarSelected}"/>
+            </Tab.Icon>
+            <ShellContent
+                Route="ChatList">
+                <ShellContent.ContentTemplate>
+                    <DataTemplate>
+                        <views:ChatListPage />
+                    </DataTemplate>
+                </ShellContent.ContentTemplate>
+            </ShellContent>
+        </Tab>
+        
+        <!-- Learning Tab -->
+        <Tab Title="Learn">
+            <Tab.Icon>
+                <FontImageSource FontFamily="Segoe UI Emoji" 
+                               Glyph="📚" 
+                               Size="24" 
+                               Color="{DynamicResource TabBarSelected}"/>
+            </Tab.Icon>
+            <ShellContent
+                Route="Learning">
+                <ShellContent.ContentTemplate>
+                    <DataTemplate>
+                        <views:LearningPage />
+                    </DataTemplate>
+                </ShellContent.ContentTemplate>
+            </ShellContent>
+        </Tab>
+        
+        <!-- Quiz Tab -->
+        <Tab Title="Quiz">
+            <Tab.Icon>
+                <FontImageSource FontFamily="Segoe UI Emoji" 
+                               Glyph="🧠" 
+                               Size="24" 
+                               Color="{DynamicResource TabBarSelected}"/>
+            </Tab.Icon>
+            <ShellContent
+                Route="Quiz">
+                <ShellContent.ContentTemplate>
+                    <DataTemplate>
+                        <views:QuizPage />
+                    </DataTemplate>
+                </ShellContent.ContentTemplate>
+            </ShellContent>
+        </Tab>
+        
+        <!-- Profile Tab -->
+        <Tab Title="Profile">
+            <Tab.Icon>
+                <FontImageSource FontFamily="Segoe UI Emoji" 
+                               Glyph="👤" 
+                               Size="24" 
+                               Color="{DynamicResource TabBarSelected}"/>
+            </Tab.Icon>
+            <ShellContent
+                Route="Profile">
+                <ShellContent.ContentTemplate>
+                    <DataTemplate>
+                        <views:ProfilePage />
+                    </DataTemplate>
+                </ShellContent.ContentTemplate>
+            </ShellContent>
+        </Tab>
+    </TabBar>
+
+</Shell>

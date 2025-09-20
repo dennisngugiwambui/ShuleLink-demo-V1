@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ShuleLink.Views.AcademicRecordsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:ShuleLink.Models"
+             Title="Academic Records"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,*">
+        
+        <!-- Header -->
+        <Frame Grid.Row="0" BackgroundColor="#4A90E2" HasShadow="True" CornerRadius="0" Padding="20,15">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Grid.Column="0" 
+                        Text="←" 
+                        FontSize="24" 
+                        BackgroundColor="Transparent" 
+                        TextColor="White" 
+                        Clicked="OnBackClicked"/>
+                
+                <Label Grid.Column="1" 
+                       Text="📊 Academic Records" 
+                       FontSize="20" 
+                       FontAttributes="Bold" 
+                       TextColor="White" 
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center"/>
+                
+                <Button Grid.Column="2" 
+                        Text="📈" 
+                        FontSize="20" 
+                        BackgroundColor="Transparent" 
+                        TextColor="White" 
+                        Clicked="OnAnalyticsClicked"/>
+            </Grid>
+        </Frame>
+
+        <!-- Academic Records ScrollView -->
+        <ScrollView Grid.Row="1" Padding="15">
+            <StackLayout x:Name="RecordsContainer" Spacing="20">
+                
+                <!-- Overall Performance Summary -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="20">
+                    <StackLayout Spacing="15">
+                        <Label Text="🎓 Overall Performance Summary" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#2C3E50"/>
+                        
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10">
+                            <Frame Grid.Column="0" Grid.Row="0" 
+                                   BackgroundColor="#E8F5E8" 
+                                   CornerRadius="10" 
+                                   Padding="15,10" 
+                                   HasShadow="False">
+                                <StackLayout Spacing="5">
+                                    <Label x:Name="CurrentGPALabel" 
+                                           Text="85.5" 
+                                           FontSize="24" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#27AE60" 
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Current GPA" 
+                                           FontSize="12" 
+                                           TextColor="#27AE60" 
+                                           HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                            
+                            <Frame Grid.Column="1" Grid.Row="0" 
+                                   BackgroundColor="#E3F2FD" 
+                                   CornerRadius="10" 
+                                   Padding="15,10" 
+                                   HasShadow="False">
+                                <StackLayout Spacing="5">
+                                    <Label x:Name="ClassPositionLabel" 
+                                           Text="5th" 
+                                           FontSize="24" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#2196F3" 
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Class Position" 
+                                           FontSize="12" 
+                                           TextColor="#2196F3" 
+                                           HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                            
+                            <Frame Grid.Column="2" Grid.Row="0" 
+                                   BackgroundColor="#FFF3E0" 
+                                   CornerRadius="10" 
+                                   Padding="15,10" 
+                                   HasShadow="False">
+                                <StackLayout Spacing="5">
+                                    <Label x:Name="StreamPositionLabel" 
+                                           Text="18th" 
+                                           FontSize="24" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#FF9800" 
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Stream Position" 
+                                           FontSize="12" 
+                                           TextColor="#FF9800" 
+                                           HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                        
+                        <Frame BackgroundColor="#F3E5F5" 
+                               CornerRadius="10" 
+                               Padding="15" 
+                               HasShadow="False">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="📈" FontSize="16"/>
+                                <Label x:Name="TrendLabel" 
+                                       Text="Performance Trend: Improving" 
+                                       FontSize="14" 
+                                       FontAttributes="Bold" 
+                                       TextColor="#7B1FA2" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Grade Records will be populated here -->
+                
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="1" 
+                           x:Name="LoadingIndicator" 
+                           IsVisible="False" 
+                           IsRunning="False" 
+                           Color="#4A90E2" 
+                           VerticalOptions="Center" 
+                           HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

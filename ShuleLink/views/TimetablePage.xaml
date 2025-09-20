@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ShuleLink.Views.TimetablePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:ShuleLink.Models"
+             xmlns:views="clr-namespace:ShuleLink.Views"
+             Title="Timetable"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+        
+        <!-- Header -->
+        <Frame Grid.Row="0" BackgroundColor="#4A90E2" HasShadow="True" CornerRadius="0" Padding="20,15">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Grid.Column="0" 
+                        Text="←" 
+                        FontSize="24" 
+                        BackgroundColor="Transparent" 
+                        TextColor="White" 
+                        Clicked="OnBackClicked"/>
+                
+                <Label Grid.Column="1" 
+                       Text="📅 Weekly Timetable" 
+                       FontSize="20" 
+                       FontAttributes="Bold" 
+                       TextColor="White" 
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center"/>
+                
+                <Button Grid.Column="2" 
+                        Text="📋" 
+                        FontSize="20" 
+                        BackgroundColor="Transparent" 
+                        TextColor="White" 
+                        Clicked="OnTodayClicked"/>
+            </Grid>
+        </Frame>
+
+        <!-- Day Selector -->
+        <Frame Grid.Row="1" BackgroundColor="White" HasShadow="False" Padding="15,10" Margin="0">
+            <CollectionView x:Name="DaySelector" 
+                            ItemsLayout="HorizontalList" 
+                            SelectionMode="Single" 
+                            SelectionChanged="OnDaySelectionChanged"
+                            HeightRequest="60">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5">
+                            <Frame x:Name="DayFrame"
+                                   BackgroundColor="{Binding BackgroundColor}"
+                                   CornerRadius="20" 
+                                   Padding="20,10" 
+                                   HasShadow="False"
+                                   WidthRequest="80">
+                                <StackLayout Spacing="2">
+                                    <Label Text="{Binding DayShort}" 
+                                           FontSize="12" 
+                                           FontAttributes="Bold" 
+                                           TextColor="{Binding TextColor}" 
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="{Binding DayName}" 
+                                           FontSize="10" 
+                                           TextColor="{Binding TextColor}" 
+                                           HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Frame>
+
+        <!-- Timetable Content -->
+        <ScrollView Grid.Row="2" Padding="15">
+            <StackLayout x:Name="TimetableContainer" Spacing="0">
+                
+                <!-- Current Day Info -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="20" 
+                       Margin="0,0,0,15">
+                    <StackLayout Spacing="10">
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Label Text="📅" FontSize="18"/>
+                            <Label x:Name="CurrentDayLabel" 
+                                   Text="Monday Schedule" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2C3E50" 
+                                   VerticalOptions="Center"/>
+                        </StackLayout>
+                        
+                        <StackLayout Orientation="Horizontal" Spacing="15">
+                            <Frame BackgroundColor="#E8F5E8" 
+                                   CornerRadius="10" 
+                                   Padding="10,5" 
+                                   HasShadow="False">
+                                <StackLayout Orientation="Horizontal" Spacing="5">
+                                    <Label Text="🕐" FontSize="14"/>
+                                    <Label x:Name="TotalPeriodsLabel" 
+                                           Text="8 Periods" 
+                                           FontSize="12" 
+                                           TextColor="#27AE60" 
+                                           FontAttributes="Bold"/>
+                                </StackLayout>
+                            </Frame>
+                            
+                            <Frame BackgroundColor="#E3F2FD" 
+                                   CornerRadius="10" 
+                                   Padding="10,5" 
+                                   HasShadow="False">
+                                <StackLayout Orientation="Horizontal" Spacing="5">
+                                    <Label Text="⏰" FontSize="14"/>
+                                    <Label Text="8:00 AM - 2:40 PM" 
+                                           FontSize="12" 
+                                           TextColor="#2196F3" 
+                                           FontAttributes="Bold"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Periods will be populated here -->
+                
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="2" 
+                           x:Name="LoadingIndicator" 
+                           IsVisible="False" 
+                           IsRunning="False" 
+                           Color="#4A90E2" 
+                           VerticalOptions="Center" 
+                           HorizontalOptions="Center"/>
+    </Grid>
+
+</ContentPage>

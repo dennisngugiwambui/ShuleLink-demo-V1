@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Modern Tab Styling - Only valid properties -->
+    <Style TargetType="Tab">
+        <!-- Tab doesn't have BackgroundColor property, so we remove it -->
+    </Style>
+
+    <!-- Shell Content Styling -->
+    <Style TargetType="ShellContent">
+        <!-- ShellContent doesn't have BackgroundColor property either -->
+    </Style>
+
+</ResourceDictionary>

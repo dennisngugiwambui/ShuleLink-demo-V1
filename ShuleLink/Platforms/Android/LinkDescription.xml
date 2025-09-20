@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <!-- Preserve all types in ShuleLink -->
+  <assembly fullname="ShuleLink">
+    <type fullname="*" />
+  </assembly>
+  
+  <!-- Preserve MAUI essentials -->
+  <assembly fullname="Microsoft.Maui">
+    <type fullname="*" />
+  </assembly>
+  
+  <assembly fullname="Microsoft.Maui.Controls">
+    <type fullname="*" />
+  </assembly>
+  
+  <assembly fullname="Microsoft.Maui.Graphics">
+    <type fullname="*" />
+  </assembly>
+  
+  <!-- Preserve SQLite -->
+  <assembly fullname="SQLite-net">
+    <type fullname="*" />
+  </assembly>
+  
+  <assembly fullname="SQLitePCLRaw.core">
+    <type fullname="*" />
+  </assembly>
+  
+  <!-- Preserve System assemblies that might be needed -->
+  <assembly fullname="System.Text.Json">
+    <type fullname="*" />
+  </assembly>
+  
+  <assembly fullname="System.Net.Http">
+    <type fullname="*" />
+  </assembly>
+  
+  <!-- Android specific preservations -->
+  <assembly fullname="Mono.Android">
+    <namespace fullname="Android.Animation" />
+    <namespace fullname="Android.Hardware" />
+    <namespace fullname="Android.Locations" />
+    <namespace fullname="Android.Support.V4.OS" />
+    <type fullname="Android.Animation.ITypeEvaluator" />
+    <type fullname="Android.Hardware.ISensorEventListener" />
+    <type fullname="Android.Locations.ILocationListener" />
+  </assembly>
+</linker>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShuleLink.MainPage"
+             Title="ShuleLink Dashboard"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="Auto,*" BackgroundColor="{DynamicResource BackgroundLight}">
+        
+        <!-- Top Navigation Bar -->
+        <Frame Grid.Row="0" 
+               BackgroundColor="{DynamicResource Primary}" 
+               CornerRadius="0" 
+               HasShadow="False" 
+               Padding="20,15,20,20"
+               Margin="0">
+            <Label Text="ShuleLink Dashboard" 
+                   FontSize="20" 
+                   FontAttributes="Bold" 
+                   TextColor="White" 
+                   VerticalOptions="Center"/>
+        </Frame>
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="1" Padding="20">
+            <StackLayout Spacing="20">
+                
+                <!-- Welcome Header -->
+                <Frame BackgroundColor="#4A90E2" 
+                       CornerRadius="15" 
+                       HasShadow="False" 
+                       Padding="20">
+                    <StackLayout Spacing="5">
+                        <Label x:Name="WelcomeLabel" 
+                               Text="Welcome back, Shule Student 1!" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="White"/>
+                        <Label x:Name="UserInfoLabel" 
+                               Text="Phone: 254758024400" 
+                               FontSize="14" 
+                               TextColor="White" 
+                               Opacity="0.9"/>
+                        <!-- User Icon -->
+                        <Label Text="👤" 
+                               FontSize="30" 
+                               HorizontalOptions="End" 
+                               VerticalOptions="Start" 
+                               Margin="0,-40,10,0"/>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Stats Cards Grid -->
+                <Grid ColumnDefinitions="*,10,*" RowDefinitions="Auto,10,Auto">
+                    
+                    <!-- Attendance Card -->
+                    <Frame Grid.Column="0" Grid.Row="0"
+                           BackgroundColor="White" 
+                           CornerRadius="15" 
+                           HasShadow="False" 
+                           Padding="20">
+                        <StackLayout Spacing="10">
+                            <Label Text="📊" FontSize="30" HorizontalOptions="Center"/>
+                            <Label Text="Attendance" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2C3E50" 
+                                   HorizontalOptions="Center"/>
+                            <Label Text="95%" 
+                                   FontSize="24" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#27AE60" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <!-- Average Grade Card -->
+                    <Frame Grid.Column="2" Grid.Row="0"
+                           BackgroundColor="White" 
+                           CornerRadius="15" 
+                           HasShadow="False" 
+                           Padding="20">
+                        <StackLayout Spacing="10">
+                            <Label Text="🎓" FontSize="30" HorizontalOptions="Center"/>
+                            <Label Text="Average Grade" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2C3E50" 
+                                   HorizontalOptions="Center"/>
+                            <Label Text="A-" 
+                                   FontSize="24" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#E67E22" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <!-- Assignments Card -->
+                    <Frame Grid.Column="0" Grid.Row="2"
+                           BackgroundColor="White" 
+                           CornerRadius="15" 
+                           HasShadow="False" 
+                           Padding="20">
+                        <StackLayout Spacing="10">
+                            <Label Text="📝" FontSize="30" HorizontalOptions="Center"/>
+                            <Label Text="Assignments" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2C3E50" 
+                                   HorizontalOptions="Center"/>
+                            <Label Text="3 Pending" 
+                                   FontSize="24" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#E74C3C" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <!-- Messages Card -->
+                    <Frame Grid.Column="2" Grid.Row="2"
+                           BackgroundColor="White" 
+                           CornerRadius="15" 
+                           HasShadow="False" 
+                           Padding="20">
+                        <StackLayout Spacing="10">
+                            <Label Text="💬" FontSize="30" HorizontalOptions="Center"/>
+                            <Label Text="Messages" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2C3E50" 
+                                   HorizontalOptions="Center"/>
+                            <Label Text="2 New" 
+                                   FontSize="24" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#3498DB" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+
+                <!-- Quick Actions -->
+                <Label Text="Quick Actions" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       TextColor="#2C3E50" 
+                       Margin="0,10,0,10"/>
+
+                <!-- Quick Action Buttons -->
+                <StackLayout Spacing="10">
+                    <!-- View Timetable Button -->
+                    <Button Text="📅 View Timetable"
+                            BackgroundColor="#3498DB"
+                            TextColor="White"
+                            CornerRadius="15"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            HeightRequest="50"
+                            x:Name="TimetableBtn"
+                            Clicked="OnTimetableClicked"/>
+                    
+                    <!-- Check Assignments Button -->
+                    <Button Text="📝 Check Assignments"
+                            BackgroundColor="#E67E22"
+                            TextColor="White"
+                            CornerRadius="15"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            HeightRequest="50"
+                            x:Name="AssignmentsBtn"
+                            Clicked="OnAssignmentsClicked"/>
+                    
+                    <!-- View Report Card Button -->
+                    <Button Text="📊 View Report Card"
+                            BackgroundColor="#27AE60"
+                            TextColor="White"
+                            CornerRadius="15"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            HeightRequest="50"
+                            x:Name="ReportCardBtn"
+                            Clicked="OnReportCardClicked"/>
+                </StackLayout>
+
+                <!-- App Version -->
+                <Label Text="ShuleLink v1.0" 
+                       FontSize="12" 
+                       TextColor="#BDC3C7" 
+                       HorizontalOptions="Center" 
+                       Margin="0,20,0,0"/>
+                
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

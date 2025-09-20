@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShuleLink.Views.ChatPage"
+             Title="Chat"
+             BackgroundColor="{DynamicResource ChatBackground}">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        
+        <!-- WhatsApp-style Header -->
+        <Frame Grid.Row="0" BackgroundColor="{DynamicResource ChatHeaderBackground}" HasShadow="False" CornerRadius="0" Padding="10,15">
+            <Grid ColumnDefinitions="Auto,Auto,*,Auto,Auto">
+                <!-- Back Button -->
+                <Button Grid.Column="0" 
+                        Text="←" 
+                        FontSize="24" 
+                        BackgroundColor="Transparent" 
+                        TextColor="White" 
+                        WidthRequest="40"
+                        Clicked="OnBackClicked"/>
+                
+                <!-- Profile Picture -->
+                <Frame Grid.Column="1" 
+                       BackgroundColor="White" 
+                       CornerRadius="25" 
+                       WidthRequest="45" 
+                       HeightRequest="45" 
+                       HasShadow="False" 
+                       Padding="0"
+                       Margin="5,0,10,0">
+                    <Label x:Name="HeaderIcon"
+                           Text="🤖" 
+                           FontSize="20" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"/>
+                </Frame>
+                
+                <!-- Name and Status -->
+                <StackLayout Grid.Column="2" Spacing="2" VerticalOptions="Center">
+                    <Label x:Name="TeacherNameLabel" 
+                           Text="AI Learning Assistant" 
+                           FontSize="18" 
+                           FontAttributes="Bold" 
+                           TextColor="White"/>
+                    <Label Text="🟢 Online" 
+                           FontSize="13" 
+                           TextColor="White" 
+                           Opacity="0.8"/>
+                </StackLayout>
+                
+                <!-- Video Call Button -->
+                <Button Grid.Column="3" 
+                        Text="📹" 
+                        FontSize="20" 
+                        BackgroundColor="Transparent" 
+                        TextColor="White" 
+                        WidthRequest="40"
+                        Clicked="OnVideoCallClicked"/>
+                
+                <!-- Voice Call Button -->
+                <Button Grid.Column="4" 
+                        Text="📞" 
+                        FontSize="20" 
+                        BackgroundColor="Transparent" 
+                        TextColor="White" 
+                        WidthRequest="40"
+                        Clicked="OnCallClicked"/>
+            </Grid>
+        </Frame>
+
+        <!-- Messages Area -->
+        <ScrollView Grid.Row="1" x:Name="MessagesScrollView" Padding="15,10">
+            <CollectionView x:Name="MessagesCollectionView" 
+                           BackgroundColor="Transparent"
+                           SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0,1">
+                            <!-- Sent Message (Right side) -->
+                            <StackLayout HorizontalOptions="End" 
+                                       Margin="50,0,0,0" 
+                                       IsVisible="{Binding IsSentByUser}">
+                                <Frame BackgroundColor="{DynamicResource ChatSentBubble}" 
+                                       CornerRadius="18" 
+                                       Padding="8,6" 
+                                       HasShadow="False" 
+                                       MaximumWidthRequest="280">
+                                    <StackLayout Spacing="2">
+                                        <Label Text="{Binding Message}" 
+                                               TextColor="{DynamicResource TextPrimary}" 
+                                               FontSize="14"
+                                               LineBreakMode="WordWrap"/>
+                                        <StackLayout Orientation="Horizontal" 
+                                                   HorizontalOptions="End" 
+                                                   Spacing="5">
+                                            <Label Text="{Binding SentAt, StringFormat='{0:HH:mm}'}" 
+                                                   TextColor="#666666" 
+                                                   FontSize="10"/>
+                                            <Label Text="✓✓" 
+                                                   TextColor="#4FC3F7" 
+                                                   FontSize="10"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                            
+                            <!-- Received Message (Left side) -->
+                            <StackLayout HorizontalOptions="Start" 
+                                       Margin="0,0,50,0" 
+                                       IsVisible="{Binding IsReceivedMessage}">
+                                <Frame BackgroundColor="{DynamicResource ChatReceivedBubble}" 
+                                       CornerRadius="18" 
+                                       Padding="8,6" 
+                                       HasShadow="False" 
+                                       MaximumWidthRequest="280">
+                                    <StackLayout Spacing="2">
+                                        <Label Text="{Binding SenderName}" 
+                                               TextColor="#075E54" 
+                                               FontSize="11"
+                                               FontAttributes="Bold"
+                                               IsVisible="{Binding ShowSenderName}"/>
+                                        <Label Text="{Binding Message}" 
+                                               TextColor="{DynamicResource TextPrimary}" 
+                                               FontSize="14"
+                                               LineBreakMode="WordWrap"/>
+                                        <Label Text="{Binding SentAt, StringFormat='{0:HH:mm}'}" 
+                                               TextColor="#666666" 
+                                               FontSize="10" 
+                                               HorizontalOptions="End"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <!-- WhatsApp-style Input Area -->
+        <Frame Grid.Row="2" 
+               BackgroundColor="{DynamicResource ChatInputBackground}" 
+               HasShadow="False" 
+               CornerRadius="0" 
+               Padding="10,8">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                <!-- Attachment Button -->
+                <Button Grid.Column="0" 
+                        Text="📎" 
+                        FontSize="20" 
+                        BackgroundColor="Transparent" 
+                        TextColor="#54656F" 
+                        WidthRequest="40" 
+                        HeightRequest="40"
+                        CornerRadius="20"
+                        Clicked="OnAttachClicked"/>
+                
+                <!-- Message Input -->
+                <Frame Grid.Column="1" 
+                       BackgroundColor="{DynamicResource ChatInputFieldBackground}" 
+                       CornerRadius="25" 
+                       HasShadow="False" 
+                       Padding="15,12">
+                    <Entry x:Name="MessageEntry" 
+                           Placeholder="Type a message" 
+                           PlaceholderColor="#8696A0"
+                           BackgroundColor="Transparent" 
+                           FontSize="16"
+                           TextColor="{DynamicResource TextPrimary}"
+                           VerticalOptions="Center"
+                           Completed="OnSendClicked"/>
+                </Frame>
+                
+                <!-- Send Button -->
+                <Button Grid.Column="2" 
+                        x:Name="SendButton"
+                        Text="➤" 
+                        FontSize="20" 
+                        FontAttributes="Bold"
+                        BackgroundColor="#00A884" 
+                        TextColor="White" 
+                        WidthRequest="50" 
+                        HeightRequest="50"
+                        CornerRadius="25"
+                        BorderWidth="2"
+                        BorderColor="#00A884"
+                        Clicked="OnSendClicked"/>
+            </Grid>
+        </Frame>
+        
+        <!-- Enhanced Typing Indicator -->
+        <Frame x:Name="TypingIndicator" 
+               Grid.Row="1" 
+               BackgroundColor="{DynamicResource ChatReceivedBubble}" 
+               CornerRadius="18" 
+               Padding="15,10" 
+               HasShadow="False" 
+               HorizontalOptions="Start" 
+               VerticalOptions="End" 
+               Margin="15,0,0,15"
+               MaximumWidthRequest="180"
+               IsVisible="False">
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <!-- Animated Typing Dots -->
+                <StackLayout Orientation="Horizontal" Spacing="3" VerticalOptions="Center">
+                    <Ellipse x:Name="TypingDot1" 
+                            Fill="#075E54" 
+                            WidthRequest="8" 
+                            HeightRequest="8"/>
+                    <Ellipse x:Name="TypingDot2" 
+                            Fill="#075E54" 
+                            WidthRequest="8" 
+                            HeightRequest="8"/>
+                    <Ellipse x:Name="TypingDot3" 
+                            Fill="#075E54" 
+                            WidthRequest="8" 
+                            HeightRequest="8"/>
+                </StackLayout>
+                
+                <!-- Typing Text -->
+                <Label x:Name="TypingText"
+                       Text="typing..." 
+                       FontSize="13" 
+                       TextColor="{DynamicResource TextSecondary}"
+                       VerticalOptions="Center"
+                       FontAttributes="Italic"/>
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

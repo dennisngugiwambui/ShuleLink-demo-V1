@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShuleLink.Views.QuizPage"
+             Title="AI Quiz Challenge"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,*">
+        
+        <!-- Header -->
+        <Frame Grid.Row="0" BackgroundColor="#E74C3C" HasShadow="True" CornerRadius="0" Padding="20,15">
+            <StackLayout>
+                <Label Text="🧠 AI Quiz Challenge" 
+                       FontSize="24" 
+                       FontAttributes="Bold" 
+                       TextColor="White" 
+                       HorizontalOptions="Center"/>
+                <Label Text="Test your knowledge with AI-generated questions" 
+                       FontSize="14" 
+                       TextColor="White" 
+                       Opacity="0.9" 
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1" Padding="15">
+            <StackLayout Spacing="20">
+                
+                <!-- Quiz Selection -->
+                <Frame x:Name="QuizSelectionFrame" 
+                       BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="0">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="0,4" Radius="15" Opacity="0.1"/>
+                    </Frame.Shadow>
+                    
+                    <StackLayout>
+                        <!-- Section Header -->
+                        <Frame BackgroundColor="#3498DB" 
+                               CornerRadius="15,15,0,0" 
+                               Padding="15,12" 
+                               HasShadow="False">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="📋" FontSize="18"/>
+                                <Label Text="Choose Your Quiz" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="White" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        
+                        <!-- Subject Selection -->
+                        <StackLayout Padding="20" Spacing="15">
+                            <Label Text="Select Subject:" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2C3E50"/>
+                            
+                            <Picker x:Name="SubjectPicker" 
+                                    Title="Choose a subject"
+                                    BackgroundColor="#F8F9FA"
+                                    TextColor="#2C3E50"
+                                    SelectedIndexChanged="OnSubjectChanged">
+                                <Picker.Items>
+                                    <x:String>Mathematics</x:String>
+                                    <x:String>Science</x:String>
+                                    <x:String>English</x:String>
+                                    <x:String>Social Studies</x:String>
+                                    <x:String>General Knowledge</x:String>
+                                </Picker.Items>
+                            </Picker>
+                            
+                            <Label Text="Select Topic:" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2C3E50"/>
+                            
+                            <Picker x:Name="TopicPicker" 
+                                    Title="Choose a topic"
+                                    BackgroundColor="#F8F9FA"
+                                    TextColor="#2C3E50"/>
+                            
+                            <Button x:Name="StartQuizBtn"
+                                    Text="🚀 Start Quiz" 
+                                    BackgroundColor="#E74C3C" 
+                                    TextColor="White" 
+                                    CornerRadius="25" 
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    HeightRequest="50"
+                                    Clicked="OnStartQuizClicked"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Quiz Content (Hidden initially) -->
+                <Frame x:Name="QuizContentFrame" 
+                       BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="0"
+                       IsVisible="False">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="0,4" Radius="15" Opacity="0.1"/>
+                    </Frame.Shadow>
+                    
+                    <StackLayout>
+                        <!-- Quiz Header -->
+                        <Frame BackgroundColor="#9B59B6" 
+                               CornerRadius="15,15,0,0" 
+                               Padding="15,12" 
+                               HasShadow="False">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="10">
+                                    <Label Text="❓" FontSize="18"/>
+                                    <Label x:Name="QuestionCounterLabel" 
+                                           Text="Question 1 of 5" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           TextColor="White" 
+                                           VerticalOptions="Center"/>
+                                </StackLayout>
+                                
+                                <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="5">
+                                    <Label Text="⏱️" FontSize="16"/>
+                                    <Label x:Name="TimerLabel" 
+                                           Text="30s" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold" 
+                                           TextColor="White"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                        
+                        <!-- Question Content -->
+                        <StackLayout Padding="20" Spacing="20">
+                            
+                            <!-- Question Text -->
+                            <Label x:Name="QuestionLabel" 
+                                   Text="Loading question..." 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2C3E50"
+                                   LineBreakMode="WordWrap"/>
+                            
+                            <!-- Diagram (if available) -->
+                            <Frame x:Name="DiagramFrame" 
+                                   BackgroundColor="#F8F9FA" 
+                                   CornerRadius="10" 
+                                   Padding="15"
+                                   IsVisible="False">
+                                <StackLayout>
+                                    <Label Text="📊 Diagram" 
+                                           FontSize="14" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#7F8C8D" 
+                                           HorizontalOptions="Center"/>
+                                    <Image x:Name="DiagramImage" 
+                                           Source="dotnet_bot.png" 
+                                           HeightRequest="200" 
+                                           Aspect="AspectFit"/>
+                                </StackLayout>
+                            </Frame>
+                            
+                            <!-- Answer Options -->
+                            <StackLayout x:Name="OptionsContainer" Spacing="10">
+                                
+                                <Button x:Name="OptionA" 
+                                        Text="A. Option A" 
+                                        BackgroundColor="#ECF0F1" 
+                                        TextColor="#2C3E50" 
+                                        CornerRadius="10" 
+                                        FontSize="14"
+                                        HorizontalOptions="Start"
+                                        Padding="15,10"
+                                        Clicked="OnOptionClicked"/>
+                                
+                                <Button x:Name="OptionB" 
+                                        Text="B. Option B" 
+                                        BackgroundColor="#ECF0F1" 
+                                        TextColor="#2C3E50" 
+                                        CornerRadius="10" 
+                                        FontSize="14"
+                                        HorizontalOptions="Start"
+                                        Padding="15,10"
+                                        Clicked="OnOptionClicked"/>
+                                
+                                <Button x:Name="OptionC" 
+                                        Text="C. Option C" 
+                                        BackgroundColor="#ECF0F1" 
+                                        TextColor="#2C3E50" 
+                                        CornerRadius="10" 
+                                        FontSize="14"
+                                        HorizontalOptions="Start"
+                                        Padding="15,10"
+                                        Clicked="OnOptionClicked"/>
+                                
+                                <Button x:Name="OptionD" 
+                                        Text="D. Option D" 
+                                        BackgroundColor="#ECF0F1" 
+                                        TextColor="#2C3E50" 
+                                        CornerRadius="10" 
+                                        FontSize="14"
+                                        HorizontalOptions="Start"
+                                        Padding="15,10"
+                                        Clicked="OnOptionClicked"/>
+                            </StackLayout>
+                            
+                            <!-- Explanation (Hidden initially) -->
+                            <Frame x:Name="ExplanationFrame" 
+                                   BackgroundColor="#D5DBDB" 
+                                   CornerRadius="10" 
+                                   Padding="15"
+                                   IsVisible="False">
+                                <StackLayout Spacing="10">
+                                    <Label Text="💡 Explanation" 
+                                           FontSize="14" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#2C3E50"/>
+                                    <Label x:Name="ExplanationLabel" 
+                                           Text="Explanation will appear here..." 
+                                           FontSize="14" 
+                                           TextColor="#2C3E50"
+                                           LineBreakMode="WordWrap"/>
+                                </StackLayout>
+                            </Frame>
+                            
+                            <!-- Next Button -->
+                            <Button x:Name="NextButton" 
+                                    Text="Next Question ➤" 
+                                    BackgroundColor="#27AE60" 
+                                    TextColor="White" 
+                                    CornerRadius="25" 
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    HeightRequest="45"
+                                    IsVisible="False"
+                                    Clicked="OnNextQuestionClicked"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Quiz Results (Hidden initially) -->
+                <Frame x:Name="ResultsFrame" 
+                       BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="0"
+                       IsVisible="False">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="0,4" Radius="15" Opacity="0.1"/>
+                    </Frame.Shadow>
+                    
+                    <StackLayout>
+                        <!-- Results Header -->
+                        <Frame BackgroundColor="#F39C12" 
+                               CornerRadius="15,15,0,0" 
+                               Padding="15,12" 
+                               HasShadow="False">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="🏆" FontSize="18"/>
+                                <Label Text="Quiz Results" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="White" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        
+                        <!-- Results Content -->
+                        <StackLayout Padding="20" Spacing="20">
+                            
+                            <!-- Score Display -->
+                            <Frame BackgroundColor="#E8F8F5" 
+                                   CornerRadius="50" 
+                                   WidthRequest="120" 
+                                   HeightRequest="120" 
+                                   HorizontalOptions="Center"
+                                   HasShadow="False">
+                                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                                    <Label x:Name="ScoreLabel" 
+                                           Text="0/5" 
+                                           FontSize="24" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#27AE60" 
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Score" 
+                                           FontSize="14" 
+                                           TextColor="#27AE60" 
+                                           HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                            
+                            <!-- Performance Message -->
+                            <Label x:Name="PerformanceLabel" 
+                                   Text="Great job!" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2C3E50" 
+                                   HorizontalOptions="Center"/>
+                            
+                            <!-- Action Buttons -->
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                <Button Grid.Column="0"
+                                        Text="🔄 Try Again" 
+                                        BackgroundColor="#3498DB" 
+                                        TextColor="White" 
+                                        CornerRadius="20" 
+                                        FontSize="14"
+                                        Clicked="OnTryAgainClicked"/>
+                                
+                                <Button Grid.Column="1"
+                                        Text="📊 View Details" 
+                                        BackgroundColor="#9B59B6" 
+                                        TextColor="White" 
+                                        CornerRadius="20" 
+                                        FontSize="14"
+                                        Clicked="OnViewDetailsClicked"/>
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                
+            </StackLayout>
+        </ScrollView>
+        
+        <!-- Loading Indicator -->
+        <ActivityIndicator x:Name="LoadingIndicator" 
+                          Grid.Row="1"
+                          IsVisible="False" 
+                          IsRunning="False" 
+                          Color="#E74C3C" 
+                          VerticalOptions="Center" 
+                          HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

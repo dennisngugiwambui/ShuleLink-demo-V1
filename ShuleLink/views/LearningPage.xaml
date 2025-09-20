@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShuleLink.Views.LearningPage"
+             Title="Daily Learning"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,*">
+        
+        <!-- Header -->
+        <Frame Grid.Row="0" BackgroundColor="#27AE60" HasShadow="True" CornerRadius="0" Padding="20,15">
+            <StackLayout>
+                <Label Text="📚 Daily Learning" 
+                       FontSize="24" 
+                       FontAttributes="Bold" 
+                       TextColor="White" 
+                       HorizontalOptions="Center"/>
+                <Label Text="Expand your knowledge with AI-powered content" 
+                       FontSize="14" 
+                       TextColor="White" 
+                       Opacity="0.9" 
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1" Padding="15">
+            <StackLayout Spacing="20">
+                
+                <!-- Quote of the Day -->
+                <Frame x:Name="QuoteFrame" 
+                       BackgroundColor="#4A90E2" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="20">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="0,4" Radius="15" Opacity="0.2"/>
+                    </Frame.Shadow>
+                    
+                    <StackLayout Spacing="15">
+                        <Label Text="💡 Quote of the Day" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="White" 
+                               HorizontalOptions="Center"/>
+                        
+                        <Frame BackgroundColor="White" 
+                               CornerRadius="10" 
+                               Padding="15" 
+                               HasShadow="False">
+                            <StackLayout Spacing="10">
+                                <Label x:Name="QuoteText" 
+                                       Text="Loading inspirational quote..." 
+                                       FontSize="16" 
+                                       FontAttributes="Italic" 
+                                       TextColor="#2C3E50" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Label x:Name="QuoteAuthor" 
+                                       Text="" 
+                                       FontSize="14" 
+                                       FontAttributes="Bold" 
+                                       TextColor="#7F8C8D" 
+                                       HorizontalTextAlignment="End"/>
+                            </StackLayout>
+                        </Frame>
+                        
+                        <Button Text="🔄 New Quote" 
+                                BackgroundColor="White" 
+                                TextColor="#4A90E2" 
+                                CornerRadius="20" 
+                                FontSize="14"
+                                Clicked="OnNewQuoteClicked"/>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Smart Search -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="20">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="0,4" Radius="15" Opacity="0.1"/>
+                    </Frame.Shadow>
+                    
+                    <StackLayout Spacing="15">
+                        <Label Text="🔍 Smart Learning Search" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#2C3E50" 
+                               HorizontalOptions="Center"/>
+                        
+                        <Frame BackgroundColor="#F8F9FA" 
+                               CornerRadius="25" 
+                               Padding="15,10" 
+                               HasShadow="False">
+                            <Entry x:Name="SearchEntry" 
+                                   Placeholder="Search topics, subjects, or content..." 
+                                   PlaceholderColor="#95A5A6" 
+                                   TextColor="#2C3E50" 
+                                   BackgroundColor="Transparent"
+                                   TextChanged="OnSearchTextChanged"/>
+                        </Frame>
+                        
+                        <!-- Search Results -->
+                        <Frame x:Name="SearchResultsFrame" 
+                               BackgroundColor="#FAFBFC" 
+                               CornerRadius="10" 
+                               Padding="0" 
+                               HasShadow="False"
+                               IsVisible="False">
+                            <CollectionView x:Name="SearchResultsCollectionView" 
+                                          BackgroundColor="Transparent"
+                                          SelectionMode="None"
+                                          MaximumHeightRequest="200">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame BackgroundColor="White" 
+                                               HasShadow="False" 
+                                               CornerRadius="8" 
+                                               Padding="12" 
+                                               Margin="5">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnSearchResultTapped"/>
+                                            </Frame.GestureRecognizers>
+                                            
+                                            <Grid ColumnDefinitions="Auto,*">
+                                                <Label Grid.Column="0" 
+                                                       Text="{Binding Icon}" 
+                                                       FontSize="16" 
+                                                       VerticalOptions="Center" 
+                                                       Margin="0,0,10,0"/>
+                                                <StackLayout Grid.Column="1" Spacing="2">
+                                                    <Label Text="{Binding Title}" 
+                                                           FontSize="14" 
+                                                           FontAttributes="Bold" 
+                                                           TextColor="#2C3E50"/>
+                                                    <Label Text="{Binding Subject}" 
+                                                           FontSize="12" 
+                                                           TextColor="#7F8C8D"/>
+                                                </StackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Recommended Reading -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="0">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="0,4" Radius="15" Opacity="0.1"/>
+                    </Frame.Shadow>
+                    
+                    <StackLayout>
+                        <!-- Section Header -->
+                        <Frame BackgroundColor="#9B59B6" 
+                               CornerRadius="15,15,0,0" 
+                               Padding="15,12" 
+                               HasShadow="False">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="📖" FontSize="18"/>
+                                <Label Text="Recommended Reading" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="White" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        
+                        <!-- Reading Topics -->
+                        <CollectionView x:Name="ReadingTopicsCollectionView" 
+                                      BackgroundColor="Transparent"
+                                      SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame BackgroundColor="Transparent" 
+                                           HasShadow="False" 
+                                           Padding="15,10">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnReadingTopicTapped"/>
+                                        </Frame.GestureRecognizers>
+                                        
+                                        <Grid ColumnDefinitions="50,*,Auto">
+                                            <!-- Subject Icon -->
+                                            <Frame Grid.Column="0" 
+                                                   BackgroundColor="{Binding SubjectColor}" 
+                                                   CornerRadius="25" 
+                                                   WidthRequest="50" 
+                                                   HeightRequest="50" 
+                                                   HasShadow="False" 
+                                                   Padding="0">
+                                                <Label Text="{Binding SubjectIcon}" 
+                                                       FontSize="20" 
+                                                       TextColor="White"
+                                                       HorizontalOptions="Center" 
+                                                       VerticalOptions="Center"/>
+                                            </Frame>
+                                            
+                                            <!-- Topic Info -->
+                                            <StackLayout Grid.Column="1" 
+                                                       Spacing="3" 
+                                                       VerticalOptions="Center" 
+                                                       Margin="12,0,0,0">
+                                                <Label Text="{Binding Title}" 
+                                                       FontSize="15" 
+                                                       FontAttributes="Bold" 
+                                                       TextColor="#2C3E50"/>
+                                                <Label Text="{Binding Subject}" 
+                                                       FontSize="13" 
+                                                       TextColor="#7F8C8D"/>
+                                                <Label Text="{Binding Description}" 
+                                                       FontSize="12" 
+                                                       TextColor="#95A5A6" 
+                                                       MaxLines="2"/>
+                                            </StackLayout>
+                                            
+                                            <!-- Read Button -->
+                                            <Button Grid.Column="2" 
+                                                    Text="📚" 
+                                                    FontSize="16" 
+                                                    BackgroundColor="#9B59B6" 
+                                                    TextColor="White" 
+                                                    CornerRadius="15" 
+                                                    WidthRequest="40" 
+                                                    HeightRequest="30" 
+                                                    Padding="0"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Science Diagrams -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="0">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="0,4" Radius="15" Opacity="0.1"/>
+                    </Frame.Shadow>
+                    
+                    <StackLayout>
+                        <!-- Section Header -->
+                        <Frame BackgroundColor="#E74C3C" 
+                               CornerRadius="15,15,0,0" 
+                               Padding="15,12" 
+                               HasShadow="False">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="🔬" FontSize="18"/>
+                                <Label Text="Science Diagrams" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="White" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        
+                        <!-- Diagram Categories -->
+                        <Grid Padding="15" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                            
+                            <Button Grid.Row="0" Grid.Column="0"
+                                    Text="🫁 Respiratory System" 
+                                    BackgroundColor="#3498DB" 
+                                    TextColor="White" 
+                                    CornerRadius="10" 
+                                    FontSize="12"
+                                    Clicked="OnDiagramClicked"/>
+                            
+                            <Button Grid.Row="0" Grid.Column="1"
+                                    Text="🍎 Digestive System" 
+                                    BackgroundColor="#E67E22" 
+                                    TextColor="White" 
+                                    CornerRadius="10" 
+                                    FontSize="12"
+                                    Clicked="OnDiagramClicked"/>
+                            
+                            <Button Grid.Row="1" Grid.Column="0"
+                                    Text="❤️ Circulatory System" 
+                                    BackgroundColor="#E74C3C" 
+                                    TextColor="White" 
+                                    CornerRadius="10" 
+                                    FontSize="12"
+                                    Clicked="OnDiagramClicked"/>
+                            
+                            <Button Grid.Row="1" Grid.Column="1"
+                                    Text="🧠 Nervous System" 
+                                    BackgroundColor="#9B59B6" 
+                                    TextColor="White" 
+                                    CornerRadius="10" 
+                                    FontSize="12"
+                                    Clicked="OnDiagramClicked"/>
+                            
+                            <Button Grid.Row="2" Grid.Column="0"
+                                    Text="🌱 Plant Parts" 
+                                    BackgroundColor="#27AE60" 
+                                    TextColor="White" 
+                                    CornerRadius="10" 
+                                    FontSize="12"
+                                    Clicked="OnDiagramClicked"/>
+                            
+                            <Button Grid.Row="2" Grid.Column="1"
+                                    Text="🌍 Solar System" 
+                                    BackgroundColor="#34495E" 
+                                    TextColor="White" 
+                                    CornerRadius="10" 
+                                    FontSize="12"
+                                    Clicked="OnDiagramClicked"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Study Tips -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="20">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="0,4" Radius="15" Opacity="0.1"/>
+                    </Frame.Shadow>
+                    
+                    <StackLayout Spacing="15">
+                        <Label Text="💡 Study Tips" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#2C3E50"/>
+                        
+                        <StackLayout Spacing="10">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="✅" FontSize="16"/>
+                                <Label Text="Read for at least 30 minutes daily" 
+                                       FontSize="14" 
+                                       TextColor="#2C3E50" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                            
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="✅" FontSize="16"/>
+                                <Label Text="Take notes while reading" 
+                                       FontSize="14" 
+                                       TextColor="#2C3E50" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                            
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="✅" FontSize="16"/>
+                                <Label Text="Ask questions about what you don't understand" 
+                                       FontSize="14" 
+                                       TextColor="#2C3E50" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                            
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="✅" FontSize="16"/>
+                                <Label Text="Practice with quizzes regularly" 
+                                       FontSize="14" 
+                                       TextColor="#2C3E50" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                
+            </StackLayout>
+        </ScrollView>
+        
+        <!-- Loading Indicator -->
+        <ActivityIndicator x:Name="LoadingIndicator" 
+                          Grid.Row="1"
+                          IsVisible="False" 
+                          IsRunning="False" 
+                          Color="#27AE60" 
+                          VerticalOptions="Center" 
+                          HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

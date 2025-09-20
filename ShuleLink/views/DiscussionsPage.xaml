@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ShuleLink.Views.DiscussionsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:ShuleLink.ViewModels"
+             xmlns:views="clr-namespace:ShuleLink.Views"
+             Title="Discussions"
+             BackgroundColor="#F8F9FA">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Frame Grid.Row="0" BackgroundColor="#4A90E2" HasShadow="False" Padding="0" Margin="0">
+            <Grid Padding="20,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" 
+                        x:Name="BackButton"
+                        Text="←" 
+                        FontSize="24" 
+                        TextColor="White" 
+                        BackgroundColor="Transparent" 
+                        Clicked="OnBackClicked" />
+
+                <Label Grid.Column="1" 
+                       Text="💬 Study Discussions" 
+                       FontSize="20" 
+                       FontAttributes="Bold" 
+                       TextColor="White" 
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+
+                <Button Grid.Column="2" 
+                        x:Name="NewPostButton"
+                        Text="✏️" 
+                        FontSize="18" 
+                        TextColor="White" 
+                        BackgroundColor="#27AE60" 
+                        CornerRadius="20" 
+                        WidthRequest="40" 
+                        HeightRequest="40"
+                        Clicked="OnNewPostClicked" />
+            </Grid>
+        </Frame>
+
+        <!-- Filters and Sort -->
+        <Frame Grid.Row="1" BackgroundColor="White" HasShadow="False" Padding="15,10" Margin="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Subject Filter -->
+                <Picker Grid.Row="0" Grid.Column="0" 
+                        x:Name="SubjectPicker" 
+                        Title="Subject" 
+                        FontSize="14"
+                        SelectedIndexChanged="OnFilterChanged" />
+
+                <!-- Grade Filter -->
+                <Picker Grid.Row="0" Grid.Column="1" 
+                        x:Name="GradePicker" 
+                        Title="Grade" 
+                        FontSize="14"
+                        SelectedIndexChanged="OnFilterChanged" />
+
+                <!-- Sort Options -->
+                <Picker Grid.Row="0" Grid.Column="2" 
+                        x:Name="SortPicker" 
+                        Title="Sort By" 
+                        FontSize="14"
+                        SelectedIndexChanged="OnFilterChanged">
+                    <Picker.Items>
+                        <x:String>Recent</x:String>
+                        <x:String>Popular</x:String>
+                        <x:String>Most Replies</x:String>
+                        <x:String>Resolved</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <!-- Search Bar -->
+                <SearchBar Grid.Row="1" Grid.ColumnSpan="3" 
+                           x:Name="SearchBar"
+                           Placeholder="Search discussions..." 
+                           FontSize="14"
+                           Margin="0,10,0,0"
+                           SearchButtonPressed="OnSearchPressed" />
+            </Grid>
+        </Frame>
+
+        <!-- Discussions List -->
+        <RefreshView Grid.Row="2" x:Name="RefreshView" Refreshing="OnRefreshing">
+            <CollectionView x:Name="DiscussionsCollectionView" 
+                            BackgroundColor="Transparent"
+                            SelectionMode="Single"
+                            SelectionChanged="OnDiscussionSelected">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="viewmodels:DiscussionViewModel">
+                        <Grid Padding="0,5">
+                            <Frame BackgroundColor="White" 
+                                   HasShadow="True" 
+                                   CornerRadius="12" 
+                                   Padding="15" 
+                                   Margin="15,5">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Header with tags and status -->
+                                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="5">
+                                            <Label Text="{Binding PostTypeIcon}" FontSize="16" />
+                                            <Frame BackgroundColor="#E3F2FD" Padding="8,4" CornerRadius="12" IsVisible="{Binding HasSubjectTag}">
+                                                <Label Text="{Binding SubjectTag}" FontSize="12" TextColor="#1976D2" FontAttributes="Bold" />
+                                            </Frame>
+                                            <Frame BackgroundColor="#F3E5F5" Padding="8,4" CornerRadius="12" IsVisible="{Binding HasGradeTag}">
+                                                <Label Text="{Binding GradeTag}" FontSize="12" TextColor="#7B1FA2" FontAttributes="Bold" />
+                                            </Frame>
+                                            <Frame BackgroundColor="#E8F5E8" Padding="8,4" CornerRadius="12" IsVisible="{Binding HasTopicTag}">
+                                                <Label Text="{Binding TopicTag}" FontSize="12" TextColor="#388E3C" FontAttributes="Bold" />
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="5">
+                                            <Label Text="📌" FontSize="16" IsVisible="{Binding IsPinned}" />
+                                            <Label Text="✅" FontSize="16" IsVisible="{Binding IsResolved}" />
+                                        </StackLayout>
+                                    </Grid>
+
+                                    <!-- Title -->
+                                    <Label Grid.Row="1" 
+                                           Text="{Binding Title}" 
+                                           FontSize="18" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#2C3E50" 
+                                           Margin="0,0,0,8" />
+
+                                    <!-- Content Preview -->
+                                    <Label Grid.Row="2" 
+                                           Text="{Binding Content}" 
+                                           FontSize="14" 
+                                           TextColor="#5D6D7E" 
+                                           MaxLines="3" 
+                                           LineBreakMode="TailTruncation" 
+                                           Margin="0,0,0,10" />
+
+                                    <!-- Image Preview -->
+                                    <Frame Grid.Row="3" 
+                                           BackgroundColor="Transparent"
+                                           CornerRadius="8" 
+                                           Padding="0"
+                                           HasShadow="False"
+                                           HeightRequest="150" 
+                                           Margin="0,0,0,10"
+                                           IsVisible="{Binding HasImage}">
+                                        <Image Source="{Binding ImageUrl}" 
+                                               Aspect="AspectFill" />
+                                    </Frame>
+
+                                    <!-- Footer with votes, replies, author, time -->
+                                    <Grid Grid.Row="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Vote Display -->
+                                        <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="5" VerticalOptions="Center">
+                                            <Button Text="▲" 
+                                                    FontSize="16" 
+                                                    TextColor="{Binding UpvoteColor}" 
+                                                    BackgroundColor="Transparent" 
+                                                    Padding="5" 
+                                                    Clicked="OnUpvoteClicked" 
+                                                    CommandParameter="{Binding Id}" />
+                                            <Label Text="{Binding VoteDisplay}" 
+                                                   FontSize="14" 
+                                                   FontAttributes="Bold" 
+                                                   TextColor="#34495E" 
+                                                   VerticalOptions="Center" />
+                                            <Button Text="▼" 
+                                                    FontSize="16" 
+                                                    TextColor="{Binding DownvoteColor}" 
+                                                    BackgroundColor="Transparent" 
+                                                    Padding="5" 
+                                                    Clicked="OnDownvoteClicked" 
+                                                    CommandParameter="{Binding Id}" />
+                                        </StackLayout>
+
+                                        <!-- Reply Count -->
+                                        <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="5" VerticalOptions="Center" Margin="15,0,0,0">
+                                            <Label Text="💬" FontSize="14" />
+                                            <Label Text="{Binding ReplyCountDisplay}" FontSize="12" TextColor="#7F8C8D" />
+                                        </StackLayout>
+
+                                        <!-- Author and Time -->
+                                        <StackLayout Grid.Column="3" Orientation="Vertical" HorizontalOptions="End">
+                                            <Label Text="{Binding AuthorName}" FontSize="12" FontAttributes="Bold" TextColor="#3498DB" />
+                                            <Label Text="{Binding TimeAgo}" FontSize="11" TextColor="#95A5A6" />
+                                        </StackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="50" VerticalOptions="Center">
+                        <Label Text="💭" FontSize="48" HorizontalOptions="Center" />
+                        <Label Text="No discussions found" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#7F8C8D" />
+                        <Label Text="Be the first to start a discussion!" FontSize="14" HorizontalOptions="Center" TextColor="#95A5A6" Margin="0,5,0,0" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </RefreshView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="2" 
+                           x:Name="LoadingIndicator" 
+                           IsVisible="False" 
+                           IsRunning="False" 
+                           Color="#4A90E2" 
+                           VerticalOptions="Center" 
+                           HorizontalOptions="Center" />
+    </Grid>
+
+</ContentPage>

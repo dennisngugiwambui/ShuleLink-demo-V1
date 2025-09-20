@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShuleLink.Views.ReadingDetailPage"
+             Title="Reading Detail"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,*">
+        
+        <!-- Header -->
+        <Frame Grid.Row="0" BackgroundColor="#9B59B6" HasShadow="True" CornerRadius="0" Padding="15">
+            <Grid ColumnDefinitions="Auto,*">
+                <Button Grid.Column="0" 
+                        Text="←" 
+                        FontSize="20" 
+                        BackgroundColor="Transparent" 
+                        TextColor="White" 
+                        Clicked="OnBackClicked"/>
+                
+                <StackLayout Grid.Column="1" Margin="10,0,0,0">
+                    <Label x:Name="TitleLabel" 
+                           Text="Reading Topic" 
+                           FontSize="18" 
+                           FontAttributes="Bold" 
+                           TextColor="White"/>
+                    <Label x:Name="SubjectLabel" 
+                           Text="Subject" 
+                           FontSize="14" 
+                           TextColor="White" 
+                           Opacity="0.9"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1" Padding="20">
+            <StackLayout Spacing="20">
+                
+                <Frame BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="15" 
+                       Padding="20">
+                    <StackLayout Spacing="15">
+                        <Label Text="📖 Reading Content" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#2C3E50"/>
+                        
+                        <Label x:Name="ContentLabel" 
+                               Text="This is where the reading content would be displayed. In a full implementation, this would contain educational material appropriate for the selected topic and grade level." 
+                               FontSize="16" 
+                               TextColor="#2C3E50" 
+                               LineBreakMode="WordWrap"/>
+                    </StackLayout>
+                </Frame>
+                
+                <Button Text="📝 Take Quiz on This Topic" 
+                        BackgroundColor="#E74C3C" 
+                        TextColor="White" 
+                        CornerRadius="25" 
+                        FontSize="16"
+                        HeightRequest="50"
+                        Clicked="OnTakeQuizClicked"/>
+                
+            </StackLayout>
+        </ScrollView>
+        
+    </Grid>
+</ContentPage>

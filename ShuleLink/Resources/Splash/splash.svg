@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="456" height="456" viewBox="0 0 456 456" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#5DADE2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#85C1E9;stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="456" height="456" fill="url(#bgGradient)"/>
+  <circle cx="228" cy="228" r="200" fill="url(#centerGlow)"/>
+  
+  <!-- Floating Education Elements -->
+  <!-- Books floating around -->
+  <g opacity="0.7">
+    <rect x="80" y="100" width="40" height="30" rx="3" fill="#FFFFFF" transform="rotate(-15 100 115)"/>
+    <rect x="82" y="102" width="36" height="26" rx="2" fill="#F8F9FA" transform="rotate(-15 100 115)"/>
+    
+    <rect x="320" y="80" width="35" height="25" rx="3" fill="#FFFFFF" transform="rotate(20 337 92)"/>
+    <rect x="322" y="82" width="31" height="21" rx="2" fill="#F8F9FA" transform="rotate(20 337 92)"/>
+    
+    <rect x="60" y="320" width="45" height="35" rx="3" fill="#FFFFFF" transform="rotate(-25 82 337)"/>
+    <rect x="62" y="322" width="41" height="31" rx="2" fill="#F8F9FA" transform="rotate(-25 82 337)"/>
+    
+    <rect x="350" y="300" width="38" height="28" rx="3" fill="#FFFFFF" transform="rotate(30 369 314)"/>
+    <rect x="352" y="302" width="34" height="24" rx="2" fill="#F8F9FA" transform="rotate(30 369 314)"/>
+  </g>
+  
+  <!-- Graduation Caps -->
+  <g opacity="0.6">
+    <polygon points="150,60 130,70 170,70" fill="#2C3E50" transform="rotate(-10 150 65)"/>
+    <rect x="145" y="60" width="10" height="8" fill="#2C3E50" transform="rotate(-10 150 65)"/>
+    
+    <polygon points="320,350 300,360 340,360" fill="#2C3E50" transform="rotate(25 320 355)"/>
+    <rect x="315" y="350" width="10" height="8" fill="#2C3E50" transform="rotate(25 320 355)"/>
+  </g>
+  
+  <!-- Central Logo Area -->
+  <circle cx="228" cy="228" r="120" fill="#FFFFFF" opacity="0.95" stroke="#2C3E50" stroke-width="3"/>
+  
+  <!-- Main Education Symbol -->
+  <g transform="translate(228, 228)">
+    <!-- Large Open Book -->
+    <rect x="-50" y="-20" width="100" height="40" rx="5" fill="#FFFFFF" stroke="#34495E" stroke-width="3"/>
+    <line x1="0" y1="-20" x2="0" y2="20" stroke="#34495E" stroke-width="3"/>
+    
+    <!-- Book Pages -->
+    <line x1="-35" y1="-10" x2="-15" y2="-10" stroke="#BDC3C7" stroke-width="2"/>
+    <line x1="-35" y1="-2" x2="-12" y2="-2" stroke="#BDC3C7" stroke-width="2"/>
+    <line x1="-35" y1="6" x2="-18" y2="6" stroke="#BDC3C7" stroke-width="2"/>
+    
+    <line x1="15" y1="-10" x2="35" y2="-10" stroke="#BDC3C7" stroke-width="2"/>
+    <line x1="12" y1="-2" x2="35" y2="-2" stroke="#BDC3C7" stroke-width="2"/>
+    <line x1="18" y1="6" x2="35" y2="6" stroke="#BDC3C7" stroke-width="2"/>
+    
+    <!-- Graduation Cap Above -->
+    <polygon points="0,-60 -30,-45 30,-45" fill="#2C3E50"/>
+    <rect x="-8" y="-60" width="16" height="12" fill="#2C3E50"/>
+    <circle cx="0" cy="-68" r="4" fill="#E74C3C"/>
+    
+    <!-- Knowledge Symbols -->
+    <circle cx="-70" cy="0" r="8" fill="#27AE60"/>
+    <text x="-70" y="4" text-anchor="middle" fill="white" font-family="Arial" font-size="10" font-weight="bold">A+</text>
+    
+    <circle cx="70" cy="0" r="8" fill="#F39C12"/>
+    <text x="70" y="4" text-anchor="middle" fill="white" font-family="Arial" font-size="12">📚</text>
+  </g>
+  
+  <!-- App Title -->
+  <text x="228" y="380" text-anchor="middle" fill="#2C3E50" font-family="Arial" font-size="32" font-weight="bold">ShuleLink</text>
+  <text x="228" y="405" text-anchor="middle" fill="#34495E" font-family="Arial" font-size="16">Educational Excellence</text>
+  
+  <!-- Decorative Stars -->
+  <g fill="#F1C40F" opacity="0.8">
+    <polygon points="100,150 103,159 112,159 105,165 108,174 100,169 92,174 95,165 88,159 97,159"/>
+    <polygon points="356,150 359,159 368,159 361,165 364,174 356,169 348,174 351,165 344,159 353,159"/>
+    <polygon points="100,306 103,315 112,315 105,321 108,330 100,325 92,330 95,321 88,315 97,315"/>
+    <polygon points="356,306 359,315 368,315 361,321 364,330 356,325 348,330 351,321 344,315 353,315"/>
+  </g>
+  
+  <!-- Subtle Pattern -->
+  <g opacity="0.1">
+    <circle cx="50" cy="50" r="3" fill="#FFFFFF"/>
+    <circle cx="406" cy="50" r="3" fill="#FFFFFF"/>
+    <circle cx="50" cy="406" r="3" fill="#FFFFFF"/>
+    <circle cx="406" cy="406" r="3" fill="#FFFFFF"/>
+    <circle cx="228" cy="50" r="2" fill="#FFFFFF"/>
+    <circle cx="228" cy="406" r="2" fill="#FFFFFF"/>
+    <circle cx="50" cy="228" r="2" fill="#FFFFFF"/>
+    <circle cx="406" cy="228" r="2" fill="#FFFFFF"/>
+  </g>
+</svg>

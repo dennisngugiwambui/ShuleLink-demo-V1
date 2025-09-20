@@ -1,0 +1,85 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-android</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>ShuleLink</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<UseInterpreter>false</UseInterpreter>
+
+		<!-- Display name -->
+		<ApplicationTitle>ShuleLink</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.shulelink.education</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+		
+		<!-- Android specific configurations for APK sharing -->
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
+		<AndroidUseAapt2>true</AndroidUseAapt2>
+		<AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<TargetPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">34.0</TargetPlatformVersion>
+	</PropertyGroup>
+
+	<!-- Android specific properties -->
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
+		<AndroidLinkMode>None</AndroidLinkMode>
+		<AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+		<EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+		<AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+		<JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
+		<RunAOTCompilation>false</RunAOTCompilation>
+		<PublishTrimmed>false</PublishTrimmed>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#4A90E2" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#4A90E2" BaseSize="456,456" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+		
+		<!-- Exclude problematic image files -->
+		<None Remove="Resources\Images\pexels-*.jpg" />
+		<MauiImage Remove="Resources\Images\pexels-*.jpg" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.6" />
+	</ItemGroup>
+
+	<!-- Android Linker Configuration -->
+	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<AndroidLinkDescription Include="Platforms\Android\LinkDescription.xml" />
+	</ItemGroup>
+
+	<!-- Suppress Android warnings -->
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<NoWarn>$(NoWarn);XA4204;XA4212;XA0113;XA0114</NoWarn>
+		<AndroidSuppressJavaStubGeneration>true</AndroidSuppressJavaStubGeneration>
+		<AndroidGenerateJniMarshalMethods>false</AndroidGenerateJniMarshalMethods>
+	</PropertyGroup>
+
+</Project>

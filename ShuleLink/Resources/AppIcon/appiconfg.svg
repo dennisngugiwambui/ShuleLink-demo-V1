@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="456" height="456" viewBox="0 0 456 456" xmlns="http://www.w3.org/2000/svg">
+  <!-- Central Education Symbol -->
+  <circle cx="228" cy="228" r="80" fill="#FFFFFF" stroke="#4A90E2" stroke-width="6"/>
+  
+  <!-- Graduation Cap -->
+  <polygon points="228,180 180,200 276,200" fill="#2C3E50"/>
+  <rect x="216" y="180" width="24" height="16" fill="#2C3E50"/>
+  <circle cx="228" cy="172" r="6" fill="#E74C3C"/>
+  
+  <!-- Open Book -->
+  <rect x="190" y="220" width="76" height="60" rx="4" fill="#FFFFFF" stroke="#34495E" stroke-width="2"/>
+  <line x1="228" y1="220" x2="228" y2="280" stroke="#34495E" stroke-width="2"/>
+  
+  <!-- Book Pages -->
+  <line x1="200" y1="235" x2="220" y2="235" stroke="#BDC3C7" stroke-width="1"/>
+  <line x1="200" y1="245" x2="218" y2="245" stroke="#BDC3C7" stroke-width="1"/>
+  <line x1="200" y1="255" x2="215" y2="255" stroke="#BDC3C7" stroke-width="1"/>
+  <line x1="200" y1="265" x2="220" y2="265" stroke="#BDC3C7" stroke-width="1"/>
+  
+  <line x1="236" y1="235" x2="256" y2="235" stroke="#BDC3C7" stroke-width="1"/>
+  <line x1="238" y1="245" x2="256" y2="245" stroke="#BDC3C7" stroke-width="1"/>
+  <line x1="241" y1="255" x2="256" y2="255" stroke="#BDC3C7" stroke-width="1"/>
+  <line x1="236" y1="265" x2="256" y2="265" stroke="#BDC3C7" stroke-width="1"/>
+  
+  <!-- Academic Excellence Stars -->
+  <polygon points="120,120 125,135 140,135 128,145 133,160 120,150 107,160 112,145 100,135 115,135" fill="#F1C40F"/>
+  <polygon points="336,120 341,135 356,135 344,145 349,160 336,150 323,160 328,145 316,135 331,135" fill="#F1C40F"/>
+  <polygon points="120,336 125,351 140,351 128,361 133,376 120,366 107,376 112,361 100,351 115,351" fill="#F1C40F"/>
+  <polygon points="336,336 341,351 356,351 344,361 349,376 336,366 323,376 328,361 316,351 331,351" fill="#F1C40F"/>
+  
+  <!-- Knowledge Dots -->
+  <circle cx="80" cy="228" r="12" fill="#27AE60"/>
+  <circle cx="376" cy="228" r="12" fill="#27AE60"/>
+  <circle cx="228" cy="80" r="12" fill="#3498DB"/>
+  <circle cx="228" cy="376" r="12" fill="#3498DB"/>
+  
+  <!-- Learning Path Lines -->
+  <line x1="92" y1="228" x2="148" y2="228" stroke="#27AE60" stroke-width="3" opacity="0.6"/>
+  <line x1="308" y1="228" x2="364" y2="228" stroke="#27AE60" stroke-width="3" opacity="0.6"/>
+  <line x1="228" y1="92" x2="228" y2="148" stroke="#3498DB" stroke-width="3" opacity="0.6"/>
+  <line x1="228" y1="308" x2="228" y2="364" stroke="#3498DB" stroke-width="3" opacity="0.6"/>
+</svg>

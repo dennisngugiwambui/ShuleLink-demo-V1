@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShuleLink.Views.ProfilePage"
+             Title="My Profile"
+             BackgroundColor="{DynamicResource BackgroundLight}">
+
+    <Grid RowDefinitions="Auto,*">
+        
+        <!-- Header -->
+        <Frame Grid.Row="0" BackgroundColor="{DynamicResource BackgroundHeader}" HasShadow="False" CornerRadius="0" Padding="20,15">
+            <StackLayout>
+                <Label Text="👤 My Profile" 
+                       FontSize="24" 
+                       FontAttributes="Bold" 
+                       TextColor="White" 
+                       HorizontalOptions="Center"/>
+                <Label Text="Manage your account and settings" 
+                       FontSize="14" 
+                       TextColor="White" 
+                       Opacity="0.9" 
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1" Padding="15">
+            <StackLayout Spacing="20">
+                
+                <!-- Profile Card -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="False" 
+                       CornerRadius="15" 
+                       Padding="20">
+                    
+                    <StackLayout Spacing="20">
+                        <!-- Profile Picture -->
+                        <Frame BackgroundColor="#E3F2FD" 
+                               CornerRadius="60" 
+                               WidthRequest="120" 
+                               HeightRequest="120" 
+                               HorizontalOptions="Center"
+                               HasShadow="False" 
+                               Padding="0">
+                            <Label Text="👨‍🎓" 
+                                   FontSize="48" 
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"/>
+                        </Frame>
+                        
+                        <!-- User Info -->
+                        <StackLayout Spacing="10">
+                            <Label x:Name="UserNameLabel" 
+                                   Text="Student Name" 
+                                   FontSize="20" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#2C3E50" 
+                                   HorizontalOptions="Center"/>
+                            
+                            <Label x:Name="UserGradeLabel" 
+                                   Text="Grade 5 East" 
+                                   FontSize="16" 
+                                   TextColor="#7F8C8D" 
+                                   HorizontalOptions="Center"/>
+                            
+                            <Label x:Name="AdmissionNumberLabel" 
+                                   Text="Admission: 12345" 
+                                   FontSize="14" 
+                                   TextColor="#95A5A6" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                        
+                        <!-- Stats -->
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                            <Frame Grid.Column="0" 
+                                   BackgroundColor="#E8F8F5" 
+                                   CornerRadius="10" 
+                                   Padding="10" 
+                                   HasShadow="False">
+                                <StackLayout>
+                                    <Label Text="📚" 
+                                           FontSize="20" 
+                                           HorizontalOptions="Center"/>
+                                    <Label x:Name="QuizzesCompletedLabel" 
+                                           Text="12" 
+                                           FontSize="18" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#27AE60" 
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Quizzes" 
+                                           FontSize="12" 
+                                           TextColor="#27AE60" 
+                                           HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                            
+                            <Frame Grid.Column="1" 
+                                   BackgroundColor="#EBF3FD" 
+                                   CornerRadius="10" 
+                                   Padding="10" 
+                                   HasShadow="False">
+                                <StackLayout>
+                                    <Label Text="🏆" 
+                                           FontSize="20" 
+                                           HorizontalOptions="Center"/>
+                                    <Label x:Name="AverageScoreLabel" 
+                                           Text="85%" 
+                                           FontSize="18" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#3498DB" 
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Average" 
+                                           FontSize="12" 
+                                           TextColor="#3498DB" 
+                                           HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                            
+                            <Frame Grid.Column="2" 
+                                   BackgroundColor="#FDF2E9" 
+                                   CornerRadius="10" 
+                                   Padding="10" 
+                                   HasShadow="False">
+                                <StackLayout>
+                                    <Label Text="⭐" 
+                                           FontSize="20" 
+                                           HorizontalOptions="Center"/>
+                                    <Label x:Name="StreakLabel" 
+                                           Text="7" 
+                                           FontSize="18" 
+                                           FontAttributes="Bold" 
+                                           TextColor="#F39C12" 
+                                           HorizontalOptions="Center"/>
+                                    <Label Text="Day Streak" 
+                                           FontSize="12" 
+                                           TextColor="#F39C12" 
+                                           HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Account Information -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="False" 
+                       CornerRadius="15" 
+                       Padding="0">
+                    
+                    <StackLayout>
+                        <!-- Section Header -->
+                        <Frame BackgroundColor="#2C3E50" 
+                               CornerRadius="15,15,0,0" 
+                               Padding="15,12" 
+                               HasShadow="False">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="ℹ️" FontSize="18"/>
+                                <Label Text="Account Information" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="White" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        
+                        <!-- Info Items -->
+                        <StackLayout Padding="20" Spacing="15">
+                            
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label Grid.Column="0" 
+                                       Text="📱" 
+                                       FontSize="16" 
+                                       VerticalOptions="Center"/>
+                                <StackLayout Grid.Column="1" Margin="15,0,0,0">
+                                    <Label Text="Phone Number" 
+                                           FontSize="12" 
+                                           TextColor="#7F8C8D"/>
+                                    <Label x:Name="PhoneNumberLabel" 
+                                           Text="+254758024400" 
+                                           FontSize="14" 
+                                           TextColor="#2C3E50"/>
+                                </StackLayout>
+                            </Grid>
+                            
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label Grid.Column="0" 
+                                       Text="👨‍👩‍👧‍👦" 
+                                       FontSize="16" 
+                                       VerticalOptions="Center"/>
+                                <StackLayout Grid.Column="1" Margin="15,0,0,0">
+                                    <Label Text="Parent/Guardian" 
+                                           FontSize="12" 
+                                           TextColor="#7F8C8D"/>
+                                    <Label x:Name="ParentNameLabel" 
+                                           Text="Parent Name" 
+                                           FontSize="14" 
+                                           TextColor="#2C3E50"/>
+                                </StackLayout>
+                            </Grid>
+                            
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label Grid.Column="0" 
+                                       Text="🏠" 
+                                       FontSize="16" 
+                                       VerticalOptions="Center"/>
+                                <StackLayout Grid.Column="1" Margin="15,0,0,0">
+                                    <Label Text="Home Address" 
+                                           FontSize="12" 
+                                           TextColor="#7F8C8D"/>
+                                    <Label x:Name="HomeAddressLabel" 
+                                           Text="Home Address" 
+                                           FontSize="14" 
+                                           TextColor="#2C3E50"/>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Settings -->
+                <Frame BackgroundColor="White" 
+                       HasShadow="False" 
+                       CornerRadius="15" 
+                       Padding="0">
+                    
+                    <StackLayout>
+                        <!-- Section Header -->
+                        <Frame BackgroundColor="#8E44AD" 
+                               CornerRadius="15,15,0,0" 
+                               Padding="15,12" 
+                               HasShadow="False">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="⚙️" FontSize="18"/>
+                                <Label Text="Settings" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="White" 
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        
+                        <!-- Settings Items -->
+                        <StackLayout Padding="15" Spacing="5">
+                            
+                            <Button Text="🔔 Notification Settings" 
+                                    BackgroundColor="Transparent" 
+                                    TextColor="#2C3E50" 
+                                    HorizontalOptions="Start" 
+                                    FontSize="14"
+                                    Clicked="OnNotificationSettingsClicked"/>
+                            
+                            <Button Text="🌙 Dark Mode" 
+                                    BackgroundColor="Transparent" 
+                                    TextColor="#2C3E50" 
+                                    HorizontalOptions="Start" 
+                                    FontSize="14"
+                                    Clicked="OnDarkModeClicked"/>
+                            
+                            <Button Text="🔒 Change Password" 
+                                    BackgroundColor="Transparent" 
+                                    TextColor="#2C3E50" 
+                                    HorizontalOptions="Start" 
+                                    FontSize="14"
+                                    Clicked="OnChangePasswordClicked"/>
+                            
+                            <Button Text="💭 Forums &amp; Discussions" 
+                                    BackgroundColor="Transparent" 
+                                    TextColor="#2C3E50" 
+                                    HorizontalOptions="Start" 
+                                    FontSize="14"
+                                    Clicked="OnDiscussionsClicked"/>
+                            
+                            <Button Text="📞 Contact Support" 
+                                    BackgroundColor="Transparent" 
+                                    TextColor="#2C3E50" 
+                                    HorizontalOptions="Start" 
+                                    FontSize="14"
+                                    Clicked="OnContactSupportClicked"/>
+                            
+                            <Button Text="ℹ️ About ShuleLink" 
+                                    BackgroundColor="Transparent" 
+                                    TextColor="#2C3E50" 
+                                    HorizontalOptions="Start" 
+                                    FontSize="14"
+                                    Clicked="OnAboutClicked"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Logout Button -->
+                <Button Text="🚪 Logout" 
+                        BackgroundColor="#E74C3C" 
+                        TextColor="White" 
+                        CornerRadius="25" 
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        Clicked="OnLogoutClicked"/>
+                
+            </StackLayout>
+        </ScrollView>
+        
+        <!-- Loading Indicator -->
+        <ActivityIndicator x:Name="LoadingIndicator" 
+                          Grid.Row="1"
+                          IsVisible="False" 
+                          IsRunning="False" 
+                          Color="#34495E" 
+                          VerticalOptions="Center" 
+                          HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>
