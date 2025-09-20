@@ -136,63 +136,60 @@
             </CollectionView>
         </ScrollView>
 
-        <!-- Professional Input Area -->
+        <!-- WhatsApp-Style Input Area -->
         <Frame Grid.Row="2" 
                BackgroundColor="{DynamicResource ChatInputBackground}" 
                HasShadow="False" 
                CornerRadius="0" 
-               Padding="15,12">
-            <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="12">
-                <!-- Attachment Button -->
+               Padding="8,8,8,12">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                
+                <!-- Main Input Container -->
                 <Frame Grid.Column="0"
                        BackgroundColor="{DynamicResource ChatInputFieldBackground}"
-                       CornerRadius="22"
-                       WidthRequest="44"
-                       HeightRequest="44"
+                       CornerRadius="25"
                        HasShadow="False"
-                       Padding="0">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnAttachClicked"/>
-                    </Frame.GestureRecognizers>
-                    <Label Text="📎" 
-                           FontSize="18" 
-                           TextColor="{DynamicResource TextSecondary}"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-                </Frame>
-                
-                <!-- Message Input Field -->
-                <Frame Grid.Column="1" 
-                       BackgroundColor="{DynamicResource ChatInputFieldBackground}" 
-                       CornerRadius="22" 
-                       HasShadow="False" 
-                       Padding="18,12">
-                    <Entry x:Name="MessageEntry" 
-                           Placeholder="Type your message..." 
-                           PlaceholderColor="{DynamicResource TextLight}"
-                           BackgroundColor="Transparent" 
-                           FontSize="15"
-                           TextColor="{DynamicResource TextPrimary}"
-                           VerticalOptions="Center"
-                           Completed="OnSendClicked"/>
-                </Frame>
-                
-                <!-- Emoji Button -->
-                <Frame Grid.Column="2"
-                       BackgroundColor="{DynamicResource ChatInputFieldBackground}"
-                       CornerRadius="22"
-                       WidthRequest="44"
-                       HeightRequest="44"
-                       HasShadow="False"
-                       Padding="0">
-                    <Label Text="😊" 
-                           FontSize="18" 
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
+                       Padding="0"
+                       HeightRequest="50">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="0">
+                        
+                        <!-- Attachment Button -->
+                        <Button Grid.Column="0"
+                                Text="📎"
+                                FontSize="20"
+                                BackgroundColor="Transparent"
+                                TextColor="{DynamicResource TextSecondary}"
+                                WidthRequest="45"
+                                HeightRequest="45"
+                                CornerRadius="22"
+                                Clicked="OnAttachClicked"/>
+                        
+                        <!-- Message Input -->
+                        <Entry Grid.Column="1"
+                               x:Name="MessageEntry" 
+                               Placeholder="Type a message" 
+                               PlaceholderColor="{DynamicResource TextLight}"
+                               BackgroundColor="Transparent" 
+                               FontSize="16"
+                               TextColor="{DynamicResource TextPrimary}"
+                               VerticalOptions="Center"
+                               Margin="0,0,10,0"
+                               Completed="OnSendClicked"/>
+                        
+                        <!-- Emoji Button -->
+                        <Button Grid.Column="2"
+                                Text="😊"
+                                FontSize="20"
+                                BackgroundColor="Transparent"
+                                TextColor="{DynamicResource TextSecondary}"
+                                WidthRequest="45"
+                                HeightRequest="45"
+                                CornerRadius="22"/>
+                    </Grid>
                 </Frame>
                 
                 <!-- Send Button -->
-                <Frame Grid.Column="3"
+                <Frame Grid.Column="1"
                        BackgroundColor="#00A884"
                        CornerRadius="25"
                        WidthRequest="50"
@@ -204,7 +201,7 @@
                     </Frame.GestureRecognizers>
                     <Label x:Name="SendButton"
                            Text="➤" 
-                           FontSize="20" 
+                           FontSize="22" 
                            FontAttributes="Bold"
                            TextColor="White"
                            HorizontalOptions="Center"
