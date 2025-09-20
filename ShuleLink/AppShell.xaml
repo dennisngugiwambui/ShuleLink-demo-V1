@@ -115,6 +115,24 @@
             </ShellContent>
         </Tab>
         
+        <!-- Forum Tab -->
+        <Tab Title="Forum">
+            <Tab.Icon>
+                <FontImageSource FontFamily="Segoe UI Emoji" 
+                               Glyph="💭" 
+                               Size="24" 
+                               Color="{DynamicResource TabBarSelected}"/>
+            </Tab.Icon>
+            <ShellContent
+                Route="discussions">
+                <ShellContent.ContentTemplate>
+                    <DataTemplate>
+                        <views:DiscussionsPage />
+                    </DataTemplate>
+                </ShellContent.ContentTemplate>
+            </ShellContent>
+        </Tab>
+        
         <!-- Profile Tab -->
         <Tab Title="Profile">
             <Tab.Icon>

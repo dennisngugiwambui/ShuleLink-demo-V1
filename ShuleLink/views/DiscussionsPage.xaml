@@ -5,7 +5,7 @@
              xmlns:viewmodels="clr-namespace:ShuleLink.ViewModels"
              xmlns:views="clr-namespace:ShuleLink.Views"
              Title="Discussions"
-             BackgroundColor="#F8F9FA">
+             BackgroundColor="{DynamicResource BackgroundLight}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Frame Grid.Row="0" BackgroundColor="#4A90E2" HasShadow="False" Padding="0" Margin="0">
+        <Frame Grid.Row="0" BackgroundColor="{DynamicResource Primary}" HasShadow="False" Padding="0" Margin="0">
             <Grid Padding="20,15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -40,16 +40,32 @@
                        VerticalOptions="Center" 
                        HorizontalOptions="Center" />
 
-                <Button Grid.Column="2" 
-                        x:Name="NewPostButton"
-                        Text="✏️" 
-                        FontSize="18" 
-                        TextColor="White" 
-                        BackgroundColor="#27AE60" 
-                        CornerRadius="20" 
-                        WidthRequest="40" 
-                        HeightRequest="40"
-                        Clicked="OnNewPostClicked" />
+                <!-- Enhanced New Post Button -->
+                <Frame Grid.Column="2"
+                       BackgroundColor="#27AE60"
+                       CornerRadius="25"
+                       WidthRequest="50"
+                       HeightRequest="50"
+                       HasShadow="False"
+                       Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnNewPostClicked"/>
+                    </Frame.GestureRecognizers>
+                    <StackLayout Orientation="Vertical" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center"
+                               Spacing="2">
+                        <Label Text="✏️" 
+                               FontSize="16" 
+                               TextColor="White"
+                               HorizontalOptions="Center"/>
+                        <Label Text="NEW" 
+                               FontSize="8" 
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               HorizontalOptions="Center"/>
+                    </StackLayout>
+                </Frame>
             </Grid>
         </Frame>
 
@@ -251,6 +267,36 @@
                            Color="#4A90E2" 
                            VerticalOptions="Center" 
                            HorizontalOptions="Center" />
+        
+        <!-- Floating Action Button -->
+        <Frame Grid.Row="2"
+               BackgroundColor="#27AE60"
+               CornerRadius="30"
+               WidthRequest="60"
+               HeightRequest="60"
+               HasShadow="True"
+               Padding="0"
+               HorizontalOptions="End"
+               VerticalOptions="End"
+               Margin="20,20,20,80">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnNewPostClicked"/>
+            </Frame.GestureRecognizers>
+            <StackLayout Orientation="Vertical" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       Spacing="2">
+                <Label Text="✏️" 
+                       FontSize="20" 
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+                <Label Text="ASK" 
+                       FontSize="10" 
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+        </Frame>
     </Grid>
 
 </ContentPage>
